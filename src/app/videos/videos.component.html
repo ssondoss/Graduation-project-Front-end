@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+<div class="mx-0 row" style="height: 100vh">
+  <!-- <div *ngIf="sidebar === true" class="col-3 border p-0">
+    <div class="d-flex">
+      <iframe
+        style="border-radius: 50%"
+        class="mx-auto my-4"
+        width="180"
+        height="180"
+        src="https://www.youtube.com/embed/ia1iuXbEaYQ"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="p-3 text-dark font-weight-bold border-bottom">build CV</div>
+
+    <div class="p-3 text-dark font-weight-bold border-bottom">build CV</div>
+    <div class="p-3 text-dark font-weight-bold border-bottom">Contact</div>
+    <div class="p-3 text-dark font-weight-bold border-bottom">Logout</div>
+  </div> -->
+  <div class="w-100">
+    <div class="px-5 mt-5">
+      <div class="row mx-0">
+        <div class="col-md-4 p-4 shadow text-center">
+          <div class="row mx-0 mb-4">
+            <div class="text-left">
+              sondos marshdeh
+              <br />
+              <small class="text-muted">web devloper</small>
+            </div>
+            <div class="text-right ml-auto">
+              <i
+                class="fa fa-ellipsis-v"
+                style="width: 50px"
+                aria-hidden="true"
+                [popoverOnHover]="false"
+                [popover]="myPopoverFlag"
+              ></i>
+
+              <popover-content
+                #myPopoverFlag
+                placement="bottom "
+                [animation]="true"
+                [closeOnClickOutside]="true"
+              >
+                <ul class="no-bullets text-left ml-0 pl-0 w-100">
+                  <li class="p-2 text-left small text-danger">
+                    <i class="fa fa-flag mr-1" aria-hidden="true"></i> report
+                    video
+                  </li>
+                </ul>
+              </popover-content>
+            </div>
+          </div>
+          <iframe
+            class="mx-auto"
+            width="100%"
+            height="auto"
+            src="https://www.youtube.com/embed/ia1iuXbEaYQ"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <!-- <div class="row mx-0 my-4 px-2">
+            <span class="mx-2">25</span>
+            <i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
+            <span class="ml-auto">
+              <span class="mx-2">25</span>
+              <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+            </span>
+          </div> -->
+          <hr />
+
+          <p class="mt-3">
+            Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum
+            dolor sit amet consectetur, adipisicing elit. Autem.
+          </p>
+
+          <hr />
+          <div class="row mx-0">
+            <button class="btn btn-outline-success w-100">Explore My cv</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd></footer-scd>
+<!--(click)="showSidebar()"-->

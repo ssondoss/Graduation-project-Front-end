@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "plusplus-cv": {
+      "hosting": {
+        "graduationProject": [
+          "plusplus-cv"
+        ]
+      }
+    }
+  }
+}

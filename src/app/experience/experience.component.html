@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+
+<div class="d-flex w-100 p-3 bg-light" style="min-height: 100vh">
+  <form
+    action=""
+    class="py-4 px-md-5 px-3 shadow bg-white col-xl-6 col-lg-8 col-md-10 m-auto"
+  >
+    <div class="row mx-0">
+      <div class="text-left mt-0 font-weight-bold">
+        <h4 class="py-3">Experience</h4>
+      </div>
+      <div class="text-right ml-auto my-auto color2 px-2 py-1 rounded">
+        3 / 6
+      </div>
+    </div>
+
+    <div class="form-group px-0 pt-4">
+      <label for=""
+        >add your experience fields (ex : 2015-2016 worked as job role in
+        company name ..)</label
+      >
+    </div>
+    <div class="border p-3">
+      <div class="form-group px-0 row mx-0">
+        <label for="" class="col-lg-3 my-auto pl-0 pb-3"> start date :</label>
+        <div class="form-group col-lg-4 col-5 px-0">
+          <input type="text" class="form-control" placeholder="month" />
+        </div>
+        <div class="form-group col-lg-5 col-7 px-0 pl-2">
+          <input type="text" class="form-control" placeholder="year" />
+        </div>
+      </div>
+      <div class="form-group px-0 row mx-0">
+        <label for="" class="col-lg-3 my-auto pl-0 pb-3"> end date :</label>
+        <div class="form-group col-lg-4 col-5 px-0">
+          <input type="text" class="form-control" placeholder="month" />
+        </div>
+        <div class="form-group col-lg-5 col-7 px-0 pl-2">
+          <input type="text" class="form-control" placeholder="year" />
+        </div>
+      </div>
+
+      <div class="form-group col-lg-12 px-0">
+        <input type="text" class="form-control" placeholder="description" />
+      </div>
+      <div class="ml-auto text-right mt-4 px-3">
+        <i class="fa fa-trash text-danger t-23"></i>
+      </div>
+    </div>
+    <div class="py-2"></div>
+    <a class="color2">
+      <i class="fa fa-plus t-8" aria-hidden="true"></i>
+      Add another field
+    </a>
+
+    <div class="form-group px-0 mt-4">
+      <div class="mt-5 text-center justify-content-center row mx-0">
+        <button class="btn btn2-bordered btn-sm mx-2" routerLink="/experience">
+          <i class="fa fa-angle-left" aria-hidden="true"></i> Back
+        </button>
+        <button class="btn btn-sm btn2 mx-2" routerLink="/skills">
+          Next <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<footer-scd></footer-scd>

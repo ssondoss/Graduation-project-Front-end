@@ -1,0 +1,276 @@
+<div class="w-100 pb-5 bg-light" style="min-height: 94vh">
+  <app-navbar></app-navbar>
+  <div class="border- py-3 px-md-5 px-2">
+    <form action="">
+      <div class="mx-0 rounded row justify-content-center">
+        <div class="col-md-4 mt-2 text-center row justify-content-center">
+          <div class="form-group col-10 px-0">
+            <input
+              type="text"
+              class="form-control rounded-0 border-right-0"
+              placeholder="Job Title"
+            />
+          </div>
+
+          <div class="form-group text-left col-2 px-0">
+            <button class="btn border bg-white rounded-0">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form-group px-1 mt-2">
+          <select class="form-control" id="">
+            <option selected>Job Type</option>
+            <option>Full-time</option>
+            <option>Part-time</option>
+            <option>Contract</option>
+            <option>Temporary</option>
+            <option>Volunteer</option>
+            <option>Internship</option>
+          </select>
+        </div>
+        <div class="form-group mt-2 px-1">
+          <select class="form-control" id="">
+            <option selected>job Location</option>
+
+            <option>Amman</option>
+            <option>balqaa</option>
+            <option>Irbid</option>
+            <option>zarqaa</option>
+            <option>Ma'an</option>
+            <option>Tafela</option>
+            <option>Aqaba</option>
+            <option>Jarash</option>
+            <option>Ajloon</option>
+            <option>Madaba</option>
+            <option>Karak</option>
+            <option>Mafraq</option>
+          </select>
+        </div>
+        <div class="form-group mt-2 px-1">
+          <select class="form-control">
+            <option selected>Experince Level</option>
+
+            <option>entry level</option>
+            <option>asscociate</option>
+            <option>mid-senior</option>
+            <option>director</option>
+            <option>Internship</option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2 px-1">
+          <select class="form-control" id="">
+            <option selected>Time Posted</option>
+
+            <option>last 24 hours</option>
+            <option>last week</option>
+            <option>last month</option>
+            <option>anytime</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container">
+    <div class="row mx-0">
+      <div class="col-md-6 mt-5">
+        <div class="border rounded p-0 bg-white">
+          <div class="p-2 p-md-3 row mx-0">
+            <div class="col-11">
+              <div class="font-weight-bold h5">job role</div>
+              <div class="text-muted">company name</div>
+              <div class="text-muted">amman , jordan</div>
+              <small class="text-muted"> 1 week ago</small>
+              <div class="row mx-0 w-100 mt-4">
+                <div class="text-left px-0">
+                  <button class="btn btn-outline-success btn-sm small">
+                    apply Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-1 px-0 text-right">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div *ngIf="detalisDiv === false" class="text-right p-2 border-top">
+            <i
+              class="fa fa-chevron-down"
+              aria-hidden="true"
+              (click)="showDetails()"
+            ></i>
+          </div>
+          <div
+            *ngIf="detalisDiv === true"
+            class="text-right p-2 border-top border-bottom"
+          >
+            <i
+              class="fa fa-chevron-up"
+              aria-hidden="true"
+              (click)="showDetails()"
+            ></i>
+          </div>
+          <div *ngIf="detalisDiv === true" class="p-3 p-md-4">
+            <div class="">
+              <div class="font-weight-bold">Job Description</div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Soluta.
+              </p>
+            </div>
+            <div class="mt-5">
+              <div class="font-weight-bold">Skills</div>
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </div>
+            <div class="mt-5">
+              <div class="font-weight-bold">Qualifactions</div>
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </div>
+            <div class="row mx-0 mt-5">
+              <div class="col-md-6">
+                <div class="font-weight-bold">seniorty level</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+              <div class="col-md-6 text-left">
+                <div class="font-weight-bold">employment type</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <span class="col-md-2 px-0 col-1 text-right">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </span> -->
+        </div>
+      </div>
+      <!-- <div class="col-4 border mx-0 px-0">
+        <div class="row mx-0 border-bottom py-3 px-0 w-100">
+          <div class="col-md-1 col-md-2 text-center px-0">
+            <img
+              src="../../assets/orangLogo.png"
+              alt=""
+              height="auto"
+              width="50"
+              class="my-auto"
+            />
+          </div>
+          <div class="col-md-9 col-9 my-auto">
+            <h5>job role</h5>
+            <div class="text-muted">company name</div>
+            <div class="text-muted">amman , jordan</div>
+            <small class="text-muted"> 1 week ago</small>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-md-6 mt-5">
+        <div class="border rounded p-0 bg-white">
+          <div class="p-2 p-md-3 row mx-0">
+            <div class="text-left px-0 col-md-2">
+              <img
+                src="../../assets/orangLogo.png"
+                alt=""
+                height="auto"
+                width="60"
+                class="my-auto"
+              />
+            </div>
+            <div class="col-9">
+              <div class="font-weight-bold h5">job role</div>
+              <div class="text-muted">company name</div>
+              <div class="text-muted">amman , jordan</div>
+              <small class="text-muted"> 1 week ago</small>
+              <div class="row mx-0 w-100 mt-4">
+                <div class="text-left px-0">
+                  <button class="btn btn-outline-success btn-sm small">
+                    apply Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-1 px-0 text-right">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div *ngIf="detalisDiv === false" class="text-right p-2 border-top">
+            <i
+              class="fa fa-chevron-down"
+              aria-hidden="true"
+              (click)="showDetails()"
+            ></i>
+          </div>
+          <div
+            *ngIf="detalisDiv === true"
+            class="text-right p-2 border-top border-bottom"
+          >
+            <i
+              class="fa fa-chevron-up"
+              aria-hidden="true"
+              (click)="showDetails()"
+            ></i>
+          </div>
+          <div *ngIf="detalisDiv === true" class="p-3 p-md-4">
+            <div class="">
+              <div class="font-weight-bold">Job Description</div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Soluta.
+              </p>
+            </div>
+            <div class="mt-5">
+              <div class="font-weight-bold">Skills</div>
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </div>
+            <div class="mt-5">
+              <div class="font-weight-bold">Qualifactions</div>
+              <ul>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet.</li>
+              </ul>
+            </div>
+            <div class="row mx-0 mt-5">
+              <div class="col-md-6">
+                <div class="font-weight-bold">seniorty level</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+              <div class="col-md-6 text-left">
+                <div class="font-weight-bold">employment type</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+              <div class="col-md-6 mt-4">
+                <div class="font-weight-bold">Job function</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+              <div class="col-md-6 text-left mt-4">
+                <div class="font-weight-bold">Industries</div>
+                <div class="text-muted">seniorty level</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <span class="col-md-2 px-0 col-1 text-right">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd style="margin-top: 100%"> </footer-scd>

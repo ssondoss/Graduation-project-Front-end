@@ -1,0 +1,464 @@
+<app-navbar></app-navbar>
+
+<div
+  class="row w-100 px-3 justify-content-center mx-0"
+  style="min-height: 90vh"
+>
+  <form
+    [formGroup]="personalInformationForm"
+    class="p-md-5 px-3 shadow bg-white col-xl-6 col-lg-8 col-md-10 m-auto h-100"
+  >
+    <div class="row mx-0 bg-light2 p-3">
+      <div class="text-left my-auto h5">Personal Information</div>
+      <div class="ml-auto my-auto">
+        <i
+          *ngIf="personalInformation === false"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+          (click)="showPersonalInformation()"
+        ></i>
+
+        <i
+          *ngIf="personalInformation === true"
+          (click)="showPersonalInformation()"
+          class="fa fa-chevron-up"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <div *ngIf="personalInformation === true">
+      <div class="row mx-0 mt-4">
+        <div class="form-group col-lg-6 px-0">
+          <label for=""> Name <span class="text-danger">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            required
+            formControlName="name"
+          />
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.name.errors?.required &&
+              personalInformationForm.controls.name.touched
+            "
+          >
+            this field is requireed
+          </mat-error>
+        </div>
+        <div class="form-group col-lg-6 px-0 pl-lg-2">
+          <label for="">Job role <span class="text-danger">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            required
+            formControlName="role"
+          />
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.role.errors?.required &&
+              personalInformationForm.controls.role.touched
+            "
+          >
+            this field is requireed
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-group col-lg-12 px-0 mt-4">
+        <label
+          >introductory video
+          <small
+            >(this video will be showed as first thing to the employers)
+            <span class="text-danger">*</span></small
+          ></label
+        >
+        <div class="custom-file">
+          <input
+            formControlName="video"
+            type="file"
+            class="custom-file-input"
+            id="validatedCustomFile"
+            required
+          />
+          <label class="custom-file-label">Choose file...</label>
+        </div>
+      </div>
+      <div class="form-group mt-4">
+        <label for=""
+          >write about yourself <span class="text-danger">*</span></label
+        >
+        <textarea
+          rows="3"
+          required
+          class="w-100 border-grey"
+          formControlName="about"
+        ></textarea>
+        <mat-error
+          *ngIf="
+            personalInformationForm.controls.about.errors?.required &&
+            personalInformationForm.controls.about.touched
+          "
+        >
+          this field is requireed
+        </mat-error>
+      </div>
+
+      <div class="form-group px-0 mt-4">
+        <div class="row mx-0">
+          <label for="" class="col-10 px-0"
+            >External links <small> (youtube , linkedin , etc)</small></label
+          >
+        </div>
+      </div>
+      <div class="row mx-0 mt-3" *ngFor="let link of links">
+        <!-- <div class="form-group col-lg-3 px-0">
+          <input type="text" class="form-control" placeholder="name" />
+        </div> -->
+        <div class="form-group col-lg-8 px-0 px-lg-2">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Link"
+            #linkValue
+            (change)="addLinkChange(link.id, linkValue.value)"
+          />
+        </div>
+        <div class="form-group col-lg-3 col-9 px-0">
+          <div *ngIf="link.icon != ''">
+            <i
+              *ngIf="link.icon == 'facebook'"
+              class="fa fa-facebook-official mx-2 fa-2x"
+            ></i>
+          </div>
+          <div class="dropdown" *ngIf="link.icon == ''">
+            <button
+              type="button"
+              class="btn border text-muted dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              Link Icon
+            </button>
+
+            <div class="dropdown-menu">
+              <a
+                class="p-3 text-left border-bottom dropdown-item"
+                (click)="addIcon(link.id, 'facebook')"
+              >
+                <i class="fa fa-facebook-official mx-2" aria-hidden="true"></i>
+                facebook
+              </a>
+              <a
+                class="p-3 text-left border-bottom dropdown-item"
+                (click)="addIcon(link.id, 'linkedin')"
+              >
+                <i class="fa fa-linkedin-square mx-2" aria-hidden="true"></i>
+                linked in
+              </a>
+              <a
+                class="p-3 text-left border-bottom dropdown-item"
+                (click)="addIcon(link.id, 'github')"
+              >
+                <i class="fa fa-github mx-2"></i>
+                github
+              </a>
+              <a
+                class="p-3 text-left border-bottom dropdown-item"
+                (click)="addIcon(link.id, 'youtube')"
+              >
+                <i class="fa fa-youtube mx-2"></i>
+                youtube
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-3 mt-1 text-left">
+          <a (click)="deleteLink(link.id)">
+            <i class="fa fa-trash text-danger t-23"></i
+          ></a>
+        </div>
+      </div>
+      <div class="col-12 px-0 mt-3">
+        <a class="text-success" (click)="addLink()">
+          <i class="fa fa-plus t-8" aria-hidden="true"></i>
+          add another link
+        </a>
+      </div>
+    </div>
+    <div class="row mx-0 bg-light2 p-3 mt-4">
+      <div class="text-left my-auto h5">Education</div>
+      <div class="ml-auto my-auto">
+        <i
+          *ngIf="educationDiv === false"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+          (click)="showEducation()"
+        ></i>
+
+        <i
+          *ngIf="educationDiv === true"
+          (click)="showEducation()"
+          class="fa fa-chevron-up"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <div *ngIf="educationDiv === true">
+      <div class="pt-4" *ngFor="let field of eduactionFields">
+        <div class="form-group px-0 row mx-0">
+          <div class="form-group col-6 px-0">
+            <mat-form-field appearance="fill">
+              <mat-label>Month and Year</mat-label>
+              <input matInput [matDatepicker]="dp" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #dp
+                startView="multi-year"
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
+
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Start Year"
+              #startDate
+              (change)="addStartDate(field.id, startDate.value)"
+            />
+          </div>
+          <div class="form-group col-6 px-0 pl-2">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="End Year"
+              #endDate
+              (change)="addEndDate(field.id, endDate.value)"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-lg-12 px-0">
+          <textarea
+            type="text"
+            class="form-control"
+            rows="2"
+            placeholder="description"
+            #description
+            (change)="addDescription(field.id, description.value)"
+          ></textarea>
+        </div>
+        <div class="text-right pb-3">
+          <small class="text-danger"> delete this field</small>
+        </div>
+      </div>
+      <div class="py-2"></div>
+      <button
+        class="btn btn-outline-success w-100"
+        (click)="addEducationField()"
+      >
+        <i class="fa fa-plus t-8" aria-hidden="true"></i>
+        Add another field
+      </button>
+    </div>
+    <div class="row mx-0 bg-light2 p-3 mt-4">
+      <div class="text-left my-auto h5">Experience</div>
+      <div class="ml-auto my-auto">
+        <i
+          *ngIf="experienceDiv === false"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+          (click)="showExperienceDiv()"
+        ></i>
+
+        <i
+          *ngIf="experienceDiv === true"
+          (click)="showExperienceDiv()"
+          class="fa fa-chevron-up"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <div *ngIf="experienceDiv === true">
+      <div *ngFor="let field of experienceFields">
+        <div class="form-group px-0 row mx-0">
+          <label for="" class="col-lg-3 my-auto pl-0 pb-3"> start date :</label>
+          <div class="form-group col-lg-4 col-5 px-0">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="month"
+              #startMonth
+              (change)="addStartMonthExperience(field.id, startMonth.value)"
+            />
+          </div>
+          <div class="form-group col-lg-5 col-7 px-0 pl-2">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="year"
+              #startYear
+              (change)="addStartYearExperience(field.id, startYear.value)"
+            />
+          </div>
+        </div>
+        <div class="form-group px-0 row mx-0">
+          <label for="" class="col-lg-3 my-auto pl-0 pb-3"> end date :</label>
+          <div class="form-group col-lg-4 col-5 px-0">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="month"
+              #endMonth
+              (change)="addEndMonthExperience(field.id, endMonth.value)"
+            />
+          </div>
+          <div class="form-group col-lg-5 col-7 px-0 pl-2">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="year"
+              #endYear
+              (change)="addEndYearExperience(field.id, endYear.value)"
+            />
+          </div>
+        </div>
+
+        <div class="form-group col-lg-12 px-0">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="description"
+            #description
+            (change)="addDescriptionExperience(field.id, description.value)"
+          />
+        </div>
+        <div class="text-right pb-3">
+          <small class="text-danger"> delete this field</small>
+        </div>
+      </div>
+      <div class="py-2"></div>
+      <button
+        class="btn-outline-success btn w-100"
+        (click)="addExperienceField()"
+      >
+        <i class="fa fa-plus t-8" aria-hidden="true"></i>
+        Add another field
+      </button>
+    </div>
+    <div class="row mx-0 bg-light2 p-3 mt-4">
+      <div class="text-left my-auto h5">skills</div>
+      <div class="ml-auto my-auto">
+        <i
+          *ngIf="skillsDiv === false"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+          (click)="showSkills()"
+        ></i>
+
+        <i
+          *ngIf="skillsDiv === true"
+          (click)="showSkills()"
+          class="fa fa-chevron-up"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+
+    <div *ngIf="skillsDiv === true">
+      <div *ngFor="let skill of skills" class="row mx-0 mt-4">
+        <div class="form-group col-10 pl-0">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="skill"
+            #skillValue
+            (change)="skillChange(skill.id, skillValue.value)"
+          />
+        </div>
+        <div class="col-2 my-auto">
+          <div class="text-right pb-3" (click)="deleteSkill(skill.id)">
+            <small class="text-danger"> delete </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="py-1"></div>
+      <button (click)="addSkill()" class="btn btn-outline-success w-100">
+        <i class="fa fa-plus t-8" aria-hidden="true"></i>
+        add another skill
+      </button>
+    </div>
+    <div class="row mx-0 bg-light2 p-3 mt-4">
+      <div class="text-left my-auto h5">Contact Information</div>
+      <div class="ml-auto my-auto">
+        <i
+          *ngIf="contactDiv === false"
+          class="fa fa-chevron-down"
+          aria-hidden="true"
+          (click)="showContactInfo()"
+        ></i>
+
+        <i
+          *ngIf="contactDiv === true"
+          (click)="showContactInfo()"
+          class="fa fa-chevron-up"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <div *ngIf="contactDiv === true">
+      <div class="form-group col-lg-12 px-0 pt-4">
+        <label for=""> E-mail</label>
+        <input type="text" class="form-control" formControlName="email" />
+      </div>
+      <div class="form-group col-lg-12 px-0 mt-3">
+        <label for=""> address</label>
+        <input type="text" class="form-control" formControlName="address" />
+      </div>
+      <div class="row mx-0 mt-3">
+        <div class="form-group col-lg-6 px-0">
+          <label for="">Mobile Number</label>
+
+          <input type="text" class="form-control" formControlName="phone" />
+        </div>
+        <!-- <div class="col-lg-6 my-auto">
+          <a class="color2">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            add another number
+          </a>
+        </div> -->
+      </div>
+    </div>
+    <!-- <button class="btn btn2-bordered w-100 my-5">ADD NEW SECTION</button> -->
+    <div class="mt-5 text-center justify-content-center row mx-0">
+      <button class="btn btn-bordered mx-2 w-100" routerLink="/education">
+        Next
+      </button>
+    </div>
+  </form>
+</div>
+<footer-scd></footer-scd>
+
+<!--<h5>conatct information</h5>
+ <div class="">  <div class="form-group col-lg-6 px-0">
+  <label for="">Mobile Number</label>
+
+  <input type="text" class="form-control" />
+</div>
+<div class="col-lg-6 my-auto">
+  <a class="text-success">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    add another number
+  </a>
+</div></div>
+ <div class="form-group col-lg-6">
+          <label for="">E-mail</label>
+          <br />
+          <input class="form-check-input" type="checkbox" value="" />
+
+          <input type="text" class="form-control" />
+        </div>  -->
