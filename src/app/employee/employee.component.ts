@@ -8,6 +8,8 @@ import { element } from 'protractor';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -19,6 +21,8 @@ import {
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { default as _rollupMoment, Moment } from 'moment';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { emailValidator } from '../app.component';
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
@@ -47,9 +51,10 @@ export const MY_FORMATS = {
   ],
 })
 export class EmployeeComponent implements OnInit {
-  eduactionFields;
-  experienceFields;
-  skills;
+  filledCv = false;
+  eduactionFields = [];
+  experienceFields = [];
+  skills = [];
   personalInformation = false;
   skillsDiv = false;
   experienceDiv = false;
@@ -58,6 +63,7 @@ export class EmployeeComponent implements OnInit {
   personalInformationForm: FormGroup;
   skillForm = false;
   links = [];
+  isSettedUp = false;
   constructor(
     public appService: AppService,
     public userSession: UserSessionService,
@@ -66,83 +72,258 @@ export class EmployeeComponent implements OnInit {
     public router: Router
   ) {
     if (!this.userSession.isLoggedIn) {
-      this.userSession.toHome();
+      this.userSession.toLoginPage();
     }
   }
+
+  startEducationDate = new FormControl(moment());
+  endEducationDate = new FormControl(moment());
+  startExperienceDate = new FormControl(moment());
+  endExperienceDate = new FormControl(moment());
+
+  chosenYearHandler(normalizedYear: Moment, date: FormControl) {
+    const ctrlValue = date.value;
+    ctrlValue.year(normalizedYear.year());
+    date.setValue(ctrlValue);
+  }
+
+  chosenMonthHandlerStartEdu(
+    normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>,
+    date: FormControl,
+    id: string
+  ) {
+    const ctrlValue = date.value;
+    ctrlValue.month(normalizedMonth.month());
+    date.setValue(ctrlValue);
+    datepicker.close();
+    let dateAsString = date.value._d + '';
+    let dateArray = dateAsString.split(' ');
+    this.eduactionFields.forEach((element) => {
+      if (element.id == id) {
+        element.startYear = dateArray[1] + '/' + dateArray[3];
+      }
+    });
+  }
+
+  chosenMonthHandlerEndEdu(
+    normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>,
+    date: FormControl,
+    id: string
+  ) {
+    console.log('heres');
+    const ctrlValue = date.value;
+    ctrlValue.month(normalizedMonth.month());
+    date.setValue(ctrlValue);
+    datepicker.close();
+    let dateAsString = date.value._d + '';
+    let dateArray = dateAsString.split(' ');
+    this.eduactionFields.forEach((element) => {
+      if (element.id == id) {
+        element.endYear = dateArray[1] + '/' + dateArray[3];
+      }
+    });
+  }
+
+  chosenMonthHandlerStartExp(
+    normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>,
+    date: FormControl,
+    id: string
+  ) {
+    const ctrlValue = date.value;
+    ctrlValue.month(normalizedMonth.month());
+    date.setValue(ctrlValue);
+    datepicker.close();
+    let dateAsString = date.value._d + '';
+    let dateArray = dateAsString.split(' ');
+    this.experienceFields.forEach((element) => {
+      if (element.id == id) {
+        element.startYear = dateArray[1] + '/' + dateArray[3];
+      }
+    });
+  }
+
+  chosenMonthHandlerEndExp(
+    normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>,
+    date: FormControl,
+    id: string
+  ) {
+    const ctrlValue = date.value;
+    ctrlValue.month(normalizedMonth.month());
+    date.setValue(ctrlValue);
+    datepicker.close();
+    let dateAsString = date.value._d + '';
+    let dateArray = dateAsString.split(' ');
+    this.experienceFields.forEach((element) => {
+      if (element.id == id) {
+        element.endYear = dateArray[1] + '/' + dateArray[3];
+      }
+    });
+    console.log(this.experienceFields);
+  }
+
   showPersonalInformation() {
     this.personalInformation = !this.personalInformation;
+    this.experienceDiv = false;
+    this.contactDiv = false;
+    this.skillsDiv = false;
+    this.educationDiv = false;
   }
   showEducation() {
     this.educationDiv = !this.educationDiv;
+    this.experienceDiv = false;
+    this.contactDiv = false;
+    this.personalInformation = false;
+    this.skillsDiv = false;
   }
   showExperienceDiv() {
     this.experienceDiv = !this.experienceDiv;
+    this.skillsDiv = false;
+    this.contactDiv = false;
+    this.personalInformation = false;
+    this.educationDiv = false;
   }
   showSkills() {
     this.skillsDiv = !this.skillsDiv;
+    this.experienceDiv = false;
+    this.contactDiv = false;
+    this.personalInformation = false;
+    this.educationDiv = false;
   }
   showContactInfo() {
     this.contactDiv = !this.contactDiv;
+    this.experienceDiv = false;
+    this.skillsDiv = false;
+    this.personalInformation = false;
+    this.educationDiv = false;
   }
 
   ngOnInit(): void {
+    this.http
+      .get(
+        environment.API + '/cv-info/cv-by-user-id/' + this.userSession.user.id
+      )
+      .subscribe(
+        (res) => {
+          this.setupFilledForm(res);
+        },
+        (err) => {
+          this.setupClearForm();
+        }
+      );
+  }
+  setupFilledForm(cvData) {
+    this.filledCv = true;
     this.personalInformationForm = this.formBuilder.group({
-      role: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(100)]),
+      role: [cvData.role, Validators.compose([Validators.required])],
+      name: [cvData.name, Validators.compose([Validators.required])],
+      video: [cvData.video],
+      about: [cvData.about, Validators.compose([Validators.required])],
+      email: [
+        cvData.email,
+        Validators.compose([Validators.required, emailValidator]),
       ],
+      phone: [
+        cvData.phone,
+        Validators.compose([Validators.required, Validators.maxLength(12)]),
+      ],
+      address: [cvData.address, Validators.compose([Validators.required])],
+    });
+
+    cvData.userEducation.forEach((element) => {
+      this.eduactionFields.push({
+        id: uuid.v4(),
+        startYear: element.startYear,
+        endYear: element.startYear,
+        description: element.description,
+      });
+    });
+
+    cvData.userExperience.forEach((element) => {
+      this.experienceFields.push({
+        id: uuid.v4(),
+        startYear: element.startYear,
+        endYear: element.startYear,
+        description: element.description,
+      });
+    });
+
+    cvData.userLinks.forEach((element) => {
+      this.links.push({
+        id: uuid.v4(),
+        link: element.link,
+        icon: element.icon,
+      });
+    });
+
+    cvData.userSkills.forEach((element) => {
+      this.skills.push({ id: uuid.v4(), skill: element });
+    });
+
+    this.uploadedVideoName = cvData.video;
+
+    // this.personalInformation = true;
+    // this.skillsDiv = true;
+    // this.experienceDiv = true;
+    // this.educationDiv = true;
+    // this.contactDiv = true;
+    // this.skillForm = true;
+
+    this.isSettedUp = true;
+  }
+  setupClearForm() {
+    this.personalInformationForm = this.formBuilder.group({
+      role: ['', Validators.compose([Validators.required])],
       name: [
         this.userSession.user.fullName,
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
+        Validators.compose([Validators.required]),
       ],
-      video: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
-      ],
-      about: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
-      ],
+      video: [''],
+      about: ['', Validators.compose([Validators.required])],
       email: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
+        this.userSession.user.email,
+        Validators.compose([Validators.required, emailValidator]),
       ],
       phone: [
         '',
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
+        Validators.compose([Validators.required, Validators.maxLength(12)]),
       ],
-      address: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(150)]),
-      ],
+      address: ['', Validators.compose([Validators.required])],
     });
-
-    this.links = [{ id: uuid.v4(), link: '', icon: '' }];
-    this.eduactionFields = [
-      {
-        id: uuid.v4(),
-        startYear: '',
-        endYear: '',
-        description: '',
-      },
-    ];
-    this.experienceFields = [
-      {
-        id: uuid.v4(),
-        startYear: '',
-        startMonth: '',
-        endMonth: '',
-        endYear: '',
-        description: '',
-      },
-    ];
-    this.skills = [{ id: uuid.v4(), skill: '' }];
+    this.eduactionFields = [];
+    this.experienceFields = [];
+    this.skills = [];
+    this.personalInformation = false;
+    this.skillsDiv = false;
+    this.experienceDiv = false;
+    this.educationDiv = false;
+    this.contactDiv = false;
+    this.skillForm = false;
+    this.links = [];
+    this.isSettedUp = true;
+    this.uploadedVideoName = '';
   }
 
   addLink() {
     if (this.links.length < 4)
       this.links.push({ id: uuid.v4(), link: '', icon: '' });
-    else alert("can't add !");
+    else
+      Swal.fire({
+        icon: 'error',
+
+        title: 'Sorry , you cant add more than 4 external links ..',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
+        showConfirmButton: false,
+        timer: 2000,
+      });
   }
   deleteLink(id) {
     console.log(id);
@@ -160,8 +341,22 @@ export class EmployeeComponent implements OnInit {
   }
 
   addSkill() {
-    if (this.skills.length < 30) this.skills.push({ id: uuid.v4(), skill: '' });
-    else alert("can't add !");
+    if (this.skills.length < 100)
+      this.skills.push({ id: uuid.v4(), skill: '' });
+    else
+      Swal.fire({
+        icon: 'error',
+
+        title: 'Sorry , you cant add more than 100 skill ..',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown',
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp',
+        },
+        showConfirmButton: false,
+        timer: 2000,
+      });
   }
   deleteSkill(id) {
     this.skills = this.skills.filter((skill: any) => skill.id != id);
@@ -182,14 +377,17 @@ export class EmployeeComponent implements OnInit {
         element.icon = icon;
       }
     });
+    console.log(this.links);
   }
+
+  changeExpDesc() {}
+
+  changeEduDesc() {}
   addExperienceField() {
     if (this.experienceFields.length < 10)
       this.experienceFields.push({
         id: uuid.v4(),
         startYear: '',
-        startMonth: '',
-        endMonth: '',
         endYear: '',
         description: '',
       });
@@ -210,95 +408,115 @@ export class EmployeeComponent implements OnInit {
       (field: any) => field.id != id
     );
   }
+  deleteExperienceField(id) {
+    this.experienceFields = this.experienceFields.filter(
+      (field: any) => field.id != id
+    );
+  }
 
-  addStartDate(id, startDate) {
-    this.eduactionFields.forEach((element) => {
-      if (element.id == id) {
-        element.startDate = startDate;
-      }
-    });
-  }
-  addStartMonthExperience(id, startMonth) {
-    this.experienceFields.forEach((element) => {
-      if (element.id == id) {
-        element.startMonth = startMonth;
-      }
-    });
-  }
-  addStartYearExperience(id, startYear) {
-    this.experienceFields.forEach((element) => {
-      if (element.id == id) {
-        element.startYear = startYear;
-      }
-    });
-  }
-  addEndMonthExperience(id, endMonth) {
-    this.experienceFields.forEach((element) => {
-      if (element.id == id) {
-        element.endMonth = endMonth;
-      }
-    });
-  }
-  addEndYearExperience(id, endYear) {
-    this.experienceFields.forEach((element) => {
-      if (element.id == id) {
-        element.endYear = endYear;
-      }
-    });
-  }
   addDescriptionExperience(id, description) {
-    this.eduactionFields.forEach((element) => {
+    this.experienceFields.forEach((element) => {
       if (element.id == id) {
-        element.startDate = description;
+        element.description = description;
       }
     });
+    console.log(this.experienceFields);
   }
-  addEndDate(id, endDate) {
-    this.eduactionFields.forEach((element) => {
-      if (element.id == id) {
-        element.startDate = endDate;
-      }
-    });
-  }
+  // addEndEcucationDate(id, endDate) {
+  //   this.eduactionFields.forEach((element) => {
+  //     if (element.id == id) {
+  //       element.startDate = endDate;
+  //     }
+  //   });
+  // }
   addDescription(id, description) {
     this.eduactionFields.forEach((element) => {
       if (element.id == id) {
-        element.startDate = description;
+        element.description = description;
       }
     });
+    console.log(this.eduactionFields);
+  }
+
+  uploadedVideoName = '';
+
+  uploadVideo(event) {
+    console.log('here');
+    let exe = event.target.files[0].name.split('.').pop();
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      let formData: FormData = new FormData();
+      formData.append('file', file, file.name);
+
+      this.http
+        .post(environment.API + '/file/upload?exe=.' + exe, formData)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.uploadedVideoName = res + '';
+            console.log(this.uploadedVideoName);
+          },
+          (error) => {
+            console.log(error);
+            if (error.status == 200) this.uploadedVideoName = error.error.text;
+            console.log(this.uploadedVideoName);
+          }
+        );
+    }
   }
   sendPersonalInformation() {
-    console.log('here');
+    if (
+      this.personalInformationForm.valid ||
+      this.uploadedVideoName.length > 1
+    ) {
+      let skills = this.skills.map((element) => element.skill);
+      this.http
+        .post(environment.API + '/cv-info', {
+          address: this.personalInformationForm.controls['address'].value,
+          email: this.personalInformationForm.controls['email'].value,
+          phone: this.personalInformationForm.controls['phone'].value,
+          cvTemplate: 'browny',
+          about: this.personalInformationForm.controls['about'].value,
+          id: uuid.v4(),
+          name: this.personalInformationForm.controls['name'].value,
+          role: this.personalInformationForm.controls['role'].value,
+          user: {
+            email: this.userSession.user.email,
+            fullName: this.userSession.user.name,
+            id: this.userSession.user.id,
+          },
+          userEducation: this.eduactionFields,
+          userExperience: this.experienceFields,
+          userSkills: skills,
+          userLinks: this.links,
+          video: this.uploadedVideoName,
+        })
+        .subscribe(
+          (data) => {
+            this.router.navigate(['/select-template']);
+          },
+          (error) => {
+            alert('NOT DONE !');
+          }
+        );
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'please fill all required parts',
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    }
+  }
 
-    let skills = this.skills.map((element) => element.skill);
-    this.http
-      .post(environment.API + '/cv-info', {
-        address: this.personalInformationForm.controls['address'].value,
-        email: this.personalInformationForm.controls['email'].value,
-        phone: this.personalInformationForm.controls['phone'].value,
+  getDate(date: string) {
+    let dateValue = new Date(date);
+    return new FormControl(dateValue);
+  }
 
-        about: this.personalInformationForm.controls['about'].value,
-        id: uuid.v4(),
-        name: this.personalInformationForm.controls['name'].value,
-        role: this.personalInformationForm.controls['role'].value,
-        user: {
-          email: this.userSession.user.email,
-          fullName: this.userSession.user.name,
-          id: this.userSession.user.id,
-        },
-        userEducation: this.eduactionFields,
-        userExperience: this.experienceFields,
-        userSkills: skills,
-        userLinks: this.links,
-        video: this.personalInformationForm.controls['video'].value,
-      })
-      .subscribe(
-        (data) => {
-          alert('DONE !');
-        },
-        (error) => {
-          alert('NOT DONE !');
-        }
-      );
+  getVideoSrc(video) {
+    return environment.VIDEOS_BASE_URL + video;
   }
 }

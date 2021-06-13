@@ -1,12 +1,24 @@
-<div class="h-100 bg-brown">
+<div class="h-100 bg-brown" *ngIf="cvData != null && cvData != undefined">
   <div
-    class="px-0 row mx-0 pt-5 justifiy-content-center flex-column-reverse flex-xl-row"
+    class="
+      row
+      mx-0
+      pt-4
+      justifiy-content-center
+      flex-column-reverse flex-md-row
+    "
   >
     <div
-      class="col-lg-6 col-xl-5 col-md-7 mx-auto bg-brown my-auto text-center"
+      class="
+        col-lg-6 col-md-7 col-xl-5
+        mx-auto
+        bg-brown
+        my-md-5 my-0
+        text-center
+      "
     >
       <h2
-        class="text-white d-none d-xl-block parent"
+        class="text-white parent mt-5 pt-4"
         style="
           white-space: nowrap;
           overflow: hidden;
@@ -17,37 +29,37 @@
         Hello. My name is
       </h2>
 
-      <h1 class="color-pink t-huge font-weight-bold mt-5">Sondos Marshdeh</h1>
-      <div class="mt-4 color-pink2 t-md">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus
-        libero minima vitae, modi eius nam sequi quod veniam qui hic at in natus
-        quae provident neque. Expedita ratione accusamus iure.
+      <h1 class="color-pink t-huge font-weight-bold mt-4">
+        {{ cvData.name }}
+      </h1>
+      <div class="mt-4 color-pink2 t-md" style="word-break: break-all">
+        {{ cvData.about }}
       </div>
-      <div class="row mx-0 pt-5 mt-xl-5 text-white text-center">
-        <div class="col-4">
-          <a class="socail" href="#" target="_blank">
-            <i class="fa fa-linkedin fa-2x text-white"></i
+      <div class="row mx-0 pt-5 mt-xl-5 text-white text-center mb-5">
+        <div class="mx-auto" *ngFor="let link of cvData.userLinks">
+          <a class="socail" [href]="link.link" target="_blank">
+            <i [class]="'fa fa-' + link.icon" class="text-white t-25"></i
           ></a>
         </div>
-        <div class="col-4 socail">
+        <!-- <div class="mx-auto socail">
           <a class="socail" href="#" target="_blank">
             <i class="fa fa-github fa-2x text-white"></i>
           </a>
         </div>
-        <div class="col-4 socail">
+        <div class="mx-auto socail">
           <a class="socail" href="#" target="_blank">
             <i class="fa fa-youtube fa-2x text-white"></i>
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
-    <div class="col-md-4 px-3 justifiy-content-center mx-auto">
-      <div class="myImg round border-pink m-auto">
-        <div
-          class="round"
-          style="background-color: #fdfbfc21; z-index: 999"
-        ></div>
-      </div>
+    <div class="col-md-4 justifiy-content-center m-auto d-flex">
+      <video
+        controls
+        [src]="getVideoSrc(cvData.video)"
+        class="border-pink mx-auto video"
+        width="100%"
+      ></video>
     </div>
   </div>
 
@@ -55,14 +67,18 @@
     <div class="py-lg-5 py-md-4 py-2 my-xl-3"></div>
 
     <h1 class="color-pink py-3 ml-md-0 ml-3">My Eduacation</h1>
-    <div class="row mx-0 w-100 time-line-div mt-5">
+    <div
+      class="row mx-0 w-100 time-line-div mt-5"
+      *ngFor="let edu of cvData.userEducation; let i = index"
+    >
       <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
         <div class="text-white time-circle mx-auto">
           <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
+            {{ edu.startYear }}
+            <span class="text-white mx-1">-</span> {{ edu.endYear }}
           </div>
           <div
+            *ngIf="i != cvData.userEducation.length - 1"
             class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
             style="width: 2px"
           ></div>
@@ -70,72 +86,7 @@
       </div>
       <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
         <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
-    <div class="row mx-0 w-100 my-5 time-line-div">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-          <div
-            class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
-            style="width: 2px"
-          ></div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
-    <div class="row mx-0 w-100 time-line-div mt-5">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-          <div
-            class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
-            style="width: 2px"
-          ></div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
-    <div class="row mx-0 w-100 time-line-div mt-5">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
+          {{ edu.description }}
         </p>
       </div>
     </div>
@@ -147,51 +98,38 @@
       class="text-center justifiy-content-center"
       style="position: relative"
     ></div>
-    <div>
-      <ul class="h6 list-unstyled">
-        <div class="row mx-0">
-          <li class="color-pink2 mx-auto skills my-4">
-            <img
-              src="../../../assets/tools.svg"
-              height="20"
-              width="20"
-              class="mr-2"
-            />
-            Lorem ipsum dolor Vitae, hic.
-          </li>
-          <li class="color-pink2 mx-auto skills my-4">
-            <img
-              src="../../../assets/tools.svg"
-              height="20"
-              width="20"
-              class="mr-2"
-            />
-            Lorem ipsum dolor Vitae, hic.
-          </li>
-          <li class="color-pink2 mx-auto skills my-4">
-            <img
-              src="../../../assets/tools.svg"
-              height="20"
-              width="20"
-              class="mr-2"
-            />
-            Lorem ipsum dolor Vitae, hic.
-          </li>
-        </div>
-      </ul>
-    </div>
+    <ul class="h6 list-unstyled">
+      <div class="row mx-0 px-0 text-left">
+        <li
+          class="color-pink2 mx-auto skills my-4 pr-5"
+          *ngFor="let skill of cvData.userSkills"
+        >
+          <img
+            src="../../../assets/tools.svg"
+            height="20"
+            width="20"
+            class="mr-2"
+          />
+          {{ skill }}
+        </li>
+      </div>
+    </ul>
     <div class="py-4"></div>
 
     <h1 class="color-pink py-3 my-5 ml-md-0 ml-3">Experience</h1>
 
-    <div class="row mx-0 w-100 time-line-div mt-5">
+    <div
+      class="row mx-0 w-100 time-line-div mt-5 fieldRow"
+      *ngFor="let exp of cvData.userExperience; let i = index"
+    >
       <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
         <div class="text-white time-circle mx-auto">
           <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
+            {{ exp.startYear }}
+            <span class="text-white mx-1">-</span> {{ exp.endYear }}
           </div>
           <div
+            *ngIf="i != cvData.userExperience.length - 1"
             class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
             style="width: 2px"
           ></div>
@@ -199,75 +137,11 @@
       </div>
       <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
         <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
+          {{ exp.description }}
         </p>
       </div>
     </div>
-    <div class="row mx-0 w-100 my-5 time-line-div">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-          <div
-            class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
-            style="width: 2px"
-          ></div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
-    <div class="row mx-0 w-100 time-line-div mt-5">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-          <div
-            class="bg-pink-white mx-auto mt-4 rounded-lg d-md-block d-none line"
-            style="width: 2px"
-          ></div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
-    <div class="row mx-0 w-100 time-line-div mt-5">
-      <div class="col-xl-2 col-md-3 col-lg-3 pb-2 pb-md-5 text-left">
-        <div class="text-white time-circle mx-auto">
-          <div class="pt-3 small mt-1">
-            6 / 2012
-            <span class="text-white mx-1">-</span> 6 / 2015
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-10 col-lg-9 col-md-9 px-0 text-left">
-        <p class="color-pink2 time-line-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          recusandae debitis iste voluptates delectus et inventore provident
-          impedit sed modi, iusto doloribus nobis illum, velit, saepe rem
-          possimus dolores quasi!
-        </p>
-      </div>
-    </div>
+
     <div class="py-4"></div>
     <h1 class="color-pink py-3 my-5 ml-md-0 ml-3">Get In Touch</h1>
     <div class="row mx-2 mx-md-3 text-md-center text-left">
@@ -279,7 +153,7 @@
           height="30"
           width="30"
         />
-        <span class="text-white">0798022719</span>
+        <span class="text-white">{{ cvData.phone }}</span>
       </div>
       <div class="mt-4 text-left col-lg-4 text-lg-center px-0">
         <img
@@ -289,7 +163,7 @@
           height="30"
           width="30"
         />
-        <span class="text-white">Jordan , Amman , khalda</span>
+        <span class="text-white">{{ cvData.address }}</span>
       </div>
       <div class="mt-4 text-left col-lg-5 text-lg-right px-0">
         <img
@@ -299,7 +173,7 @@
           height="30"
           width="30"
         />
-        <span class="text-white">sondosmarashdeh360@gmail.com</span>
+        <span class="text-white">{{ cvData.email }}</span>
       </div>
     </div>
     <div class="py-4"></div>
@@ -313,7 +187,7 @@
         </div>
         <div class="col-8 text-center col-md-6">
           <a
-            href=""
+            [href]="'mailto:' + cvData.email"
             class="color-pink border-pink2 p-3 px-4 rounded-lg h4 get_in_touch"
             >contact me</a
           >

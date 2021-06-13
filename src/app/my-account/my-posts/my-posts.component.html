@@ -1,0 +1,41 @@
+<div class="w-100 pb-5" style="min-height: 94vh">
+  <app-navbar></app-navbar>
+  <div class="container my-5 py-5">
+    <div class="row mx-0">
+      <div class="col-md-3 border px-0 rounded h-100 bg-white">
+        <side-nav></side-nav>
+      </div>
+      <div class="col-md-9 mr-auto mt-5 mt-md-0 px-0 px-md-4">
+        <div class="h5 mb-3">Posted jobs</div>
+        <div class="table-responsive">
+          <table class="table table-bordered bg-white small">
+            <thead class="bg-scd text-center">
+              <tr>
+                <th>Jobe Title</th>
+                <th>Company</th>
+                <th>location</th>
+                <th>date</th>
+                <th>details</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let post of jobsPosts">
+                <td>{{ post.jobRole }}</td>
+                <td>{{ post.companyName }}</td>
+                <td>{{ post.jobLocation }} , {{ post.country }}</td>
+                <td>{{ post.dateAndTime | date }}</td>
+                <td>
+                  <a
+                    class="fa fa-eye color-main t-16"
+                    (click)="viewDetails(post)"
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd style="margin-top: 100%"> </footer-scd>

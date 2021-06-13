@@ -1,0 +1,82 @@
+<div class="w-100 pb-5" style="min-height: 94vh">
+  <app-navbar></app-navbar>
+  <div class="container my-5 py-5">
+    <div class="row mx-0">
+      <div class="col-md-3 px-0 rounded h-100 border bg-white">
+        <side-nav></side-nav>
+      </div>
+      <div class="col-md-9 mr-auto mt-5 mt-md-0 px-0 px-md-4">
+        <div class="h5 mb-3">account Information</div>
+        <div class="p-md-5 p-3 rounded border bg-white rounded">
+          <form [formGroup]="accountInfoForm">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                formControlName="name"
+                minlength="3"
+                maxlength="150"
+              />
+              <mat-error
+                *ngIf="
+                  accountInfoForm.controls.name.errors?.required &&
+                  accountInfoForm.controls.name.touched
+                "
+              >
+                this field is required
+              </mat-error>
+              <mat-error
+                *ngIf="accountInfoForm.controls.name.hasError('minlength')"
+              >
+                minlength of 3 characters
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" disabled="" />
+            </mat-form-field>
+
+            <!-- <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input
+                matInput
+                formControlName="phone"
+                required
+                maxlength="15"
+                minlength="10"
+                pattern="[0-9]+"
+              />
+              <mat-error
+                *ngIf="
+                  accountInfoForm.controls.phone.errors?.required &&
+                  accountInfoForm.controls.phone.touched
+                "
+                >this field is required</mat-error
+              >
+              <mat-error
+                *ngIf="accountInfoForm.controls.phone.hasError('pattern')"
+              >
+                Lorem ipsum dolor sit.
+              </mat-error>
+              <mat-error
+                *ngIf="accountInfoForm.controls.phone.hasError('minlength')"
+              >
+                Lorem ipsum dolor sit.
+              </mat-error>
+            </mat-form-field> -->
+
+            <div class="form-group text-left mt-4">
+              <button
+                class="btn btn-main py-2 px-3"
+                (click)="updateAccountInformation()"
+              >
+                <small> Save Changes</small>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd style="margin-top: 100%"> </footer-scd>

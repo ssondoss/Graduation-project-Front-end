@@ -1,0 +1,58 @@
+<div class="w-100 pb-5" style="min-height: 94vh">
+  <app-navbar></app-navbar>
+  <div class="container my-5 py-5">
+    <div class="row mx-0">
+      <div class="col-md-3 border px-0 rounded h-100 bg-white">
+        <side-nav></side-nav>
+      </div>
+      <div class="col-md-9 mr-auto mt-5 mt-md-0 px-0 px-md-4">
+        <div class="h5 mb-3">My Applications</div>
+        <div class="table-responsive">
+          <table class="table table-bordered bg-white small">
+            <thead class="bg-scd text-center">
+              <tr>
+                <th>Job Post</th>
+                <th>Status</th>
+                <th>date of application</th>
+                <!-- <th>details</th> -->
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let application of myApplications">
+                <td>
+                  <a
+                    (click)="viewDetails(application.jobPost)"
+                    class="color-main"
+                    style="text-decoration: underline; cursor: pointer"
+                  >
+                    post Details
+                  </a>
+                </td>
+                <td *ngIf="application.viewedByPublisher == false">
+                  Not Viewed By Publisher
+                </td>
+                <td *ngIf="application.viewedByPublisher == true">
+                  Viewed By Publisher
+                </td>
+                <td>{{ application.appliedDate | date }}</td>
+                <!-- <td>
+                  <i
+                    class="fa fa-eye color-main t-16"
+                    routerLink="/application-details"
+                  ></i>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="bg-white border p-4"
+          *ngIf="details === true && selectedJobPost != null"
+        >
+          <div class="">{{ selectedJobPost.jobRole }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd style="margin-top: 100%"> </footer-scd>

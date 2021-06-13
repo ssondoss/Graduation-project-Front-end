@@ -1,0 +1,53 @@
+mat-label {
+  font-size: small !important;
+}
+.circle {
+  height: 80px !important;
+  width: 80px !important;
+  border-radius: 50% !important;
+}
+.border-grey {
+  border: 1px solid #cccccc;
+}
+.circle img {
+  height: 40px;
+}
+@media screen and (max-width: 542px) {
+  .circle img {
+    height: 25px;
+  }
+  .h5 {
+    font-size: 15px !important;
+  }
+  .text-head {
+    font-size: 12px !important;
+  }
+  .circle {
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50% !important;
+  }
+}
+@media screen and (max-width: 769px) and (min-width: 543px) {
+  h3 {
+    font-size: 21px !important;
+  }
+  .circle img {
+    height: 40px !important;
+  }
+  .circle {
+    height: 80px !important;
+    width: 80px !important;
+    border-radius: 50% !important;
+  }
+}
+@media screen and (max-width: 1025px) and (min-width: 769px) {
+  .circle img {
+    height: 30px;
+  }
+  .circle {
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50% !important;
+  }
+}

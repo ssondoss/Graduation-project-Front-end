@@ -1,0 +1,31 @@
+<div class="row border-bottom py-2">
+  <h5 class="text-left col-6">Cv Link</h5>
+  <i class="fa fa-times text-dark text-right col-6 pt-1" (click)="onNoClick()">
+  </i>
+</div>
+<div>
+  <form action="" class="mt-4">
+    <p class="">Copy your CV link and share it ultimately :</p>
+    <div class="row mx-0 py-3" *ngIf="!isCopied">
+      <input
+        type="text"
+        class="form-control col-md-11 col-10"
+        [value]="data.link"
+        #input
+      />
+
+      <i
+        class="fa fa-clipboard fa-2x pl-3 color-main copy"
+        aria-hidden="true"
+        (click)="copyUrl(input)"
+      ></i>
+    </div>
+    <div *ngIf="isCopied" class="small alert alert-success">
+      <i class="fa fa-check-square-o" aria-hidden="true"></i> Copied !
+    </div>
+  </form>
+
+  <div class="text-right mt-4">
+    <button class="btn btn-danger mx-1 p-2" (click)="onNoClick()">close</button>
+  </div>
+</div>

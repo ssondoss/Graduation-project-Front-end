@@ -1,0 +1,21 @@
+.overlay {
+  background-color: #ffffff;
+  height: 100%;
+}
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.overlay:hover .cvTempalte {
+  opacity: 0.4;
+}
+
+.overlay:hover .middle {
+  opacity: 1;
+}

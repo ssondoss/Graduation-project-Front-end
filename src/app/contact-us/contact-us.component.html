@@ -1,46 +1,91 @@
 <app-navbar></app-navbar>
 <div
-  class="bg-light"
-  style="min-height: 100vh; clip-path: inset(75% 0 12% 0); position: relative"
+  class="bg-light2 d-none d-lg-block m-h"
+  style="clip-path: inset(75% 0 12% 0); position: relative"
 ></div>
-<div
-  class="text-center justify-content-center w-100"
-  style="position: absolute; top: 9%"
->
+<div class="text-center justify-content-center w-100 main-div">
   <div class="text-center mb-3 py-5">
     <h3 class="letter-spacing text-uppercase">
       <span class="color3 my-auto">Contact</span> us
     </h3>
   </div>
 
-  <div class="row mx-0 w-100 d-flex">
-    <div class="col-md-5 mx-auto">
-      <form action="" class="border px-5 py-4 bg-white rounded-lg mx-5 shadow">
+  <div class="row mx-0 w-100 flex-column-reverse flex-lg-row">
+    <div class="col-xl-5 col-lg-7 mx-auto my-5 my-md-1">
+      <form
+        [formGroup]="contactForm"
+        class="border px-md-5 py-4 bg-white rounded-lg mx-md-5 px-4 shadow"
+      >
         <h6 class="py-4">
           We're open for any suggestion or just to have a chat :
         </h6>
 
-        <div class="form-group mt-4">
-          <input type="text" class="form-control" placeholder="Your Name" />
+        <div class="form-group mt-4 text-left">
+          <input
+            type="text"
+            class="form-control mb-1"
+            required
+            placeholder="Your Name"
+            maxlength="200"
+            formControlName="name"
+          />
+          <mat-error
+            *ngIf="
+              contactForm.controls.name.errors?.required &&
+              contactForm.controls.name.touched
+            "
+          >
+            this field is required
+          </mat-error>
         </div>
-        <div class="form-group mt-4">
-          <input type="text" class="form-control" placeholder="Your Email" />
+        <div class="form-group mt-4 text-left">
+          <input
+            type="text"
+            class="form-control mb-1"
+            placeholder="Your Email"
+            required
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="
+              contactForm.controls.email.errors?.required &&
+              contactForm.controls.email.touched
+            "
+          >
+            this field is required
+          </mat-error>
+          <mat-error
+            *ngIf="contactForm.controls.email.hasError('invalidEmail')"
+          >
+            invalid email address
+          </mat-error>
         </div>
-        <div class="form-group mt-4">
+        <div class="form-group mt-4 text-left">
           <textarea
-            name=""
-            id=""
+            formControlName="message"
             rows="4"
             class="w-100 p-2"
+            maxlength="800"
+            required
             placeholder="Message"
           ></textarea>
+          <mat-error
+            *ngIf="
+              contactForm.controls.message.errors?.required &&
+              contactForm.controls.message.touched
+            "
+          >
+            this field is required
+          </mat-error>
         </div>
-        <button class="btn btn-main my-4 w-25 py-3">SEND</button>
+        <button class="btn btn-main my-4 w-50 py-3" (click)="sendMessage()">
+          SEND
+        </button>
       </form>
     </div>
 
-    <div class="col-md-5 d-flex text-left">
-      <div class="my-auto text-left">
+    <div class="col-lg-5 d-flex text-left mb-md-5 mb-2 mb-lg-0">
+      <div class="my-auto text-left mx-lg-0 mx-md-5 mx-0 px-3 px-lg-0">
         <div class="my-auto">
           <img
             src="../../assets/email (1).svg"
@@ -48,7 +93,7 @@
             height="40"
             width="auto"
           />
-          <span class="font-weight-bold my-auto mx-3">
+          <span class="font-weight-bold my-auto mx-2">
             sondosmarashdeh360@gmail.com
           </span>
         </div>
@@ -62,11 +107,17 @@
           <span class="font-weight-bold my-auto mx-3"> 0798022719 </span>
         </div>
         <div class="mt-5">
-          <img src="../../assets/address.svg" alt="" height="40" width="auto" />
+          <img
+            src="../../assets/conatc-address.svg"
+            alt=""
+            height="45"
+            width="auto"
+          />
           <span class="font-weight-bold my-auto mx-3"> Jordan , Amman </span>
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+<div class="py-5"></div>
+<app-footer class="mt-5"></app-footer>

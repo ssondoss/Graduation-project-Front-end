@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserSessionService {
+  toLoginPage() {
+    this.router.navigate(['/login']);
+  }
   isLoggedIn: boolean;
   user: any;
 
@@ -21,7 +24,11 @@ export class UserSessionService {
     this.user = JSON.parse(localStorage.getItem('userToken'));
     this.router.navigate(['/']);
   }
-
+  public logout() {
+    this.isLoggedIn = false;
+    localStorage.removeItem('userToken');
+    this.router.navigate(['/']);
+  }
   public toHome() {
     this.router.navigate(['/']);
   }

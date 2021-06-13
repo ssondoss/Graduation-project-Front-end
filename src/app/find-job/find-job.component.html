@@ -1,182 +1,104 @@
-<div class="w-100 pb-5 bg-light" style="min-height: 94vh">
+<div class="w-100 pb-5 bg-white" style="min-height: 94vh">
   <app-navbar></app-navbar>
-  <div class="border- py-3 px-md-5 px-2">
-    <form action="">
+  <div class="p-md-4">
+    <form action="" class="bg-white pt-4 px-3 mb-5 rounded-lg">
       <div class="mx-0 rounded row justify-content-center">
-        <div class="col-md-4 mt-2 text-center row justify-content-center">
-          <div class="form-group col-10 px-0">
-            <input
-              type="text"
-              class="form-control rounded-0 border-right-0"
-              placeholder="Job Title"
-            />
-          </div>
+        <mat-form-field class="col-md-4" appearance="fill">
+          <mat-label>search job title or company ..</mat-label>
+          <input
+            matInput
+            required
+            [(ngModel)]="searchKey"
+            (input)="filter()"
+            name="searchKey"
+          />
+          <mat-icon matSuffix
+            ><i class="fa fa-search color-main" aria-hidden="true"></i>
+          </mat-icon>
+        </mat-form-field>
 
-          <div class="form-group text-left col-2 px-0">
-            <button class="btn border bg-white rounded-0">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <div class="form-group px-1 mt-2">
-          <select class="form-control" id="">
-            <option selected>Job Type</option>
-            <option>Full-time</option>
-            <option>Part-time</option>
-            <option>Contract</option>
-            <option>Temporary</option>
-            <option>Volunteer</option>
-            <option>Internship</option>
-          </select>
-        </div>
-        <div class="form-group mt-2 px-1">
-          <select class="form-control" id="">
-            <option selected>job Location</option>
-
-            <option>Amman</option>
-            <option>balqaa</option>
-            <option>Irbid</option>
-            <option>zarqaa</option>
-            <option>Ma'an</option>
-            <option>Tafela</option>
-            <option>Aqaba</option>
-            <option>Jarash</option>
-            <option>Ajloon</option>
-            <option>Madaba</option>
-            <option>Karak</option>
-            <option>Mafraq</option>
-          </select>
-        </div>
-        <div class="form-group mt-2 px-1">
-          <select class="form-control">
-            <option selected>Experince Level</option>
-
-            <option>entry level</option>
-            <option>asscociate</option>
-            <option>mid-senior</option>
-            <option>director</option>
-            <option>Internship</option>
-          </select>
-        </div>
-
-        <div class="form-group mt-2 px-1">
-          <select class="form-control" id="">
-            <option selected>Time Posted</option>
-
-            <option>last 24 hours</option>
-            <option>last week</option>
-            <option>last month</option>
-            <option>anytime</option>
-          </select>
-        </div>
+        <mat-form-field class="col-md-2 px-0" appearance="outline">
+          <mat-label>City</mat-label>
+          <mat-select
+            [(ngModel)]="city"
+            (selectionChange)="filter()"
+            name="city"
+          >
+            <mat-option value="all">All</mat-option>
+            <mat-option value="amman">Amman</mat-option>
+            <mat-option value="balqaa">Balqaa </mat-option>
+            <mat-option value="irbid"> Irbid</mat-option>
+            <mat-option value="zarqaa">Zarqaa</mat-option>
+            <mat-option value="ma'an">Ma'an </mat-option>
+            <mat-option value="tafela">Tafela </mat-option>
+            <mat-option value="aqaba">Aqaba </mat-option>
+            <mat-option value="madaba">Madaba </mat-option>
+            <mat-option value="ajloon">Ajloon </mat-option>
+            <mat-option value="jarash">Jarash </mat-option>
+            <mat-option value="karak">Karak </mat-option>
+            <mat-option value="mafraq">Mafraq </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-2 px-0">
+          <mat-label>Employment type</mat-label>
+          <mat-select
+            [(ngModel)]="employmentType"
+            (selectionChange)="filter()"
+            name="employmentType"
+          >
+            <mat-option value="all"> All </mat-option>
+            <mat-option value="full-time">Full-time </mat-option>
+            <mat-option value="part-time">Part-time</mat-option>
+            <mat-option value="contract">Contract</mat-option>
+            <mat-option value="temporary">Temporary </mat-option>
+            <mat-option value="volunteer">Volunteer </mat-option>
+            <mat-option value="internship">Internship </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-2 px-0">
+          <mat-label>Experince Level</mat-label>
+          <mat-select
+            [(ngModel)]="expereinceLevel"
+            (selectionChange)="filter()"
+            name="expereinceLevel"
+          >
+            <mat-option value="all">All </mat-option>
+            <mat-option value="entry-level">Entry-level </mat-option>
+            <mat-option value="asscociate">Asscociate</mat-option>
+            <mat-option value="mid-senior">Mid-senior</mat-option>
+            <mat-option value="director">Director</mat-option>
+            <mat-option value="internship">Internship </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-2 px-0">
+          <mat-label>Time Posted</mat-label>
+          <mat-select
+            [(ngModel)]="typeOfSelection"
+            (selectionChange)="filter()"
+            name="typeOfSelection"
+          >
+            <mat-option value="all">All </mat-option>
+            <mat-option value="last24">last 24 hours </mat-option>
+            <mat-option value="lastWeek"> last week</mat-option>
+            <mat-option value="lastMonth"> last month</mat-option>
+            <mat-option value="anytime">anytime </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </form>
-  </div>
-  <div class="container">
     <div class="row mx-0">
-      <div class="col-md-6 mt-5">
-        <div class="border rounded p-0 bg-white">
-          <div class="p-2 p-md-3 row mx-0">
-            <div class="col-11">
-              <div class="font-weight-bold h5">job role</div>
-              <div class="text-muted">company name</div>
-              <div class="text-muted">amman , jordan</div>
-              <small class="text-muted"> 1 week ago</small>
-              <div class="row mx-0 w-100 mt-4">
-                <div class="text-left px-0">
-                  <button class="btn btn-outline-success btn-sm small">
-                    apply Now
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-1 px-0 text-right">
-              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div *ngIf="detalisDiv === false" class="text-right p-2 border-top">
-            <i
-              class="fa fa-chevron-down"
-              aria-hidden="true"
-              (click)="showDetails()"
-            ></i>
-          </div>
-          <div
-            *ngIf="detalisDiv === true"
-            class="text-right p-2 border-top border-bottom"
-          >
-            <i
-              class="fa fa-chevron-up"
-              aria-hidden="true"
-              (click)="showDetails()"
-            ></i>
-          </div>
-          <div *ngIf="detalisDiv === true" class="p-3 p-md-4">
-            <div class="">
-              <div class="font-weight-bold">Job Description</div>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Soluta.
-              </p>
-            </div>
-            <div class="mt-5">
-              <div class="font-weight-bold">Skills</div>
-              <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-              </ul>
-            </div>
-            <div class="mt-5">
-              <div class="font-weight-bold">Qualifactions</div>
-              <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-              </ul>
-            </div>
-            <div class="row mx-0 mt-5">
-              <div class="col-md-6">
-                <div class="font-weight-bold">seniorty level</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-              <div class="col-md-6 text-left">
-                <div class="font-weight-bold">employment type</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- <span class="col-md-2 px-0 col-1 text-right">
-              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-            </span> -->
-        </div>
-      </div>
-      <!-- <div class="col-4 border mx-0 px-0">
-        <div class="row mx-0 border-bottom py-3 px-0 w-100">
-          <div class="col-md-1 col-md-2 text-center px-0">
-            <img
-              src="../../assets/orangLogo.png"
-              alt=""
-              height="auto"
-              width="50"
-              class="my-auto"
-            />
-          </div>
-          <div class="col-md-9 col-9 my-auto">
-            <h5>job role</h5>
-            <div class="text-muted">company name</div>
-            <div class="text-muted">amman , jordan</div>
-            <small class="text-muted"> 1 week ago</small>
-          </div>
-        </div>
-      </div> -->
-      <div class="col-md-6 mt-5">
-        <div class="border rounded p-0 bg-white">
-          <div class="p-2 p-md-3 row mx-0">
-            <div class="text-left px-0 col-md-2">
+      <div
+        *ngFor="let post of jobsPosts"
+        class="mb-5 col-xl-3 col-lg-4 col-md-6"
+      >
+        <div
+          class="rounded p-0 rounded-lg border hover-light"
+          [ngClass]="{ 'bg-light': !isApplied(post.id) }"
+          routerLink="/job-details"
+          [queryParams]="{ id: post.id }"
+        >
+          <div class="row mx-0 p-2 px-md-2 pt-3">
+            <!-- <div class="text-left px-0 col-md-2">
               <img
                 src="../../assets/orangLogo.png"
                 alt=""
@@ -184,90 +106,90 @@
                 width="60"
                 class="my-auto"
               />
+            </div> -->
+            <div class="col-12">
+              <div class="font-weight-bold h6">{{ post.jobRole }}</div>
+              <div class="text-muted mt-2 t-md">{{ post.companyName }}</div>
+              <div class="text-muted t-md mt-2">
+                {{ post.jobLocation }} , {{ post.country }}
+              </div>
+              <div class="text-muted small mt-3">
+                {{ formatDate(post.dateAndTime) }} ago
+              </div>
             </div>
-            <div class="col-9">
-              <div class="font-weight-bold h5">job role</div>
-              <div class="text-muted">company name</div>
-              <div class="text-muted">amman , jordan</div>
-              <small class="text-muted"> 1 week ago</small>
-              <div class="row mx-0 w-100 mt-4">
-                <div class="text-left px-0">
-                  <button class="btn btn-outline-success btn-sm small">
-                    apply Now
-                  </button>
+          </div>
+          <div class="text-left py-2 px-4 border-top mt-3">
+            <a
+              class="small color-main w-100"
+              routerLink="/job-details"
+              [queryParams]="{ id: post.id }"
+            >
+              more details
+            </a>
+          </div>
+          <!-- <div
+              class="text-left py-2 px-4 border-top mt-3 border-bottom"
+              *ngIf="isShowen(post.id) === true"
+            >
+              <a class="small color-main w-100" (click)="showDetails(post.id)">
+                less details
+              </a>
+            </div> -->
+          <!-- <div
+              *ngIf="detalisDiv === false"
+              class="text-right p-2 border-top"
+              (click)="showDetails()"
+            >
+              <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
+            </div>
+            <div
+              *ngIf="detalisDiv === true"
+              class="text-right p-2 border-top border-bottom"
+              (click)="showDetails()"
+            >
+              <i class="fa fa-chevron-up fa-sm" aria-hidden="true"></i>
+           </div> -->
+          <!-- <div *ngIf="isShowen(post.id) === true">
+              <div class="p-3 p-md-4 t-13">
+                <div class="px-0">
+                  <div class="font-weight-bold px-0">Job Description</div>
+                  <p class="break">
+                    {{ post.jobDescription }}
+                  </p>
+                </div>
+                <div class="mt-5">
+                  <div class="font-weight-bold">Skills</div>
+                  <ul>
+                    <li *ngFor="let skill of post.skills" class="break">
+                      {{ skill }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="mt-5">
+                  <div class="font-weight-bold">Qualifactions</div>
+                  <ul>
+                    <li
+                      *ngFor="let qualifaction of post.qualifications"
+                      class="break"
+                    >
+                      {{ qualifaction }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="row mx-0 mt-5 t-13">
+                  <div class="col-md-6 px-0">
+                    <div class="font-weight-bold">seniorty level</div>
+                    <div class="text-muted">{{ post.experienceLevel }}</div>
+                  </div>
+                  <div class="col-md-6 text-left px-0">
+                    <div class="font-weight-bold">employment type</div>
+                    <div class="text-muted">{{ post.employementType }}</div>
+                  </div>
+
                 </div>
               </div>
-            </div>
-            <div class="col-1 px-0 text-right">
-              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div *ngIf="detalisDiv === false" class="text-right p-2 border-top">
-            <i
-              class="fa fa-chevron-down"
-              aria-hidden="true"
-              (click)="showDetails()"
-            ></i>
-          </div>
-          <div
-            *ngIf="detalisDiv === true"
-            class="text-right p-2 border-top border-bottom"
-          >
-            <i
-              class="fa fa-chevron-up"
-              aria-hidden="true"
-              (click)="showDetails()"
-            ></i>
-          </div>
-          <div *ngIf="detalisDiv === true" class="p-3 p-md-4">
-            <div class="">
-              <div class="font-weight-bold">Job Description</div>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Soluta.
-              </p>
-            </div>
-            <div class="mt-5">
-              <div class="font-weight-bold">Skills</div>
-              <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-              </ul>
-            </div>
-            <div class="mt-5">
-              <div class="font-weight-bold">Qualifactions</div>
-              <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-              </ul>
-            </div>
-            <div class="row mx-0 mt-5">
-              <div class="col-md-6">
-                <div class="font-weight-bold">seniorty level</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-              <div class="col-md-6 text-left">
-                <div class="font-weight-bold">employment type</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-              <div class="col-md-6 mt-4">
-                <div class="font-weight-bold">Job function</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-              <div class="col-md-6 text-left mt-4">
-                <div class="font-weight-bold">Industries</div>
-                <div class="text-muted">seniorty level</div>
-              </div>
-            </div>
-          </div>
 
-          <!-- <span class="col-md-2 px-0 col-1 text-right">
-              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-            </span> -->
+            </div>  -->
         </div>
       </div>
     </div>

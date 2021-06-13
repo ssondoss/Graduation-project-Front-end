@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   API: 'http://localhost:5050',
+  VIDEOS_BASE_URL: 'http://localhost:5050/images/',
 
   firebaseConfig: {
     apiKey: 'AIzaSyDeo4TfATjDFJKzF6MPBOYmZYlscPtiGAw',

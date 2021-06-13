@@ -10,17 +10,16 @@ import { HomeComponent } from './home/home.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AngularFireModule } from '@angular/fire';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatSelectModule } from '@angular/material/select/';
+import { MatIconModule } from '@angular/material/icon';
 import { environment } from 'src/environments/environment';
 import { EmployeerComponent } from './employeer/employeer.component';
 import { VideosComponent } from './videos/videos.component';
 import { RegestrationComponent } from './regestration/regestration.component';
 import { LoginComponent } from './login/login.component';
-import { NavbarScdComponent } from './navbar-scd/navbar-scd.component';
 import { FooterScdComponent } from './footer-scd/footer-scd.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
-import { NavDashboardComponent } from './nav-dashboard/nav-dashboard.component';
 import { AppService } from './app.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,21 +32,40 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
 } from '@angular/material/dialog';
 import { PopoverModule } from 'ngx-smart-popover';
-import { EducationComponent } from './education/education.component';
-import { ExperienceComponent } from './experience/experience.component';
 import { SkillsComponent } from './skills/skills.component';
-import { ContactInformationComponent } from './contact-information/contact-information.component';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
-import { NewSectionComponent } from './contact-information/new-section/new-section.component';
 import { FindJobComponent } from './find-job/find-job.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
-import { EmployerAccountComponent } from './employer-account/employer-account.component';
-import { EmployeeAccountComponent } from './employee-account/employee-account.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UserSessionService } from './user-session.service';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { BrownyComponent } from './cv-templates/browny/browny.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { HalfsComponent } from './cv-templates/halfs/halfs.component';
+import { FixedContainerComponent } from './cv-templates/fixed-container/fixed-container.component';
+import { SelectTemplateComponent } from './select-template/select-template.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { SideNavComponent } from './my-account/side-nav/side-nav.component';
+import { ChangePasswordComponent } from './my-account/change-password/change-password.component';
+import { MyPostsComponent } from './my-account/my-posts/my-posts.component';
+import { PostDetailsComponent } from './my-account/post-details/post-details.component';
+import { MyApplicationComponent } from './my-account/my-application/my-application.component';
+import { DarkThemeComponent } from './cv-templates/dark-theme/dark-theme.component';
+import { LightThemeComponent } from './cv-templates/light-theme/light-theme.component';
+import { FixedContainer2Component } from './cv-templates/fixed-container2/fixed-container2.component';
+import { FixedContainer3Component } from './cv-templates/fixed-container3/fixed-container3.component';
+import { CvLinkComponent } from './select-template/cv-link/cv-link.component';
+import { MyCvComponent } from './my-account/my-cv/my-cv.component';
+import { BrowseTemplatesComponent } from './browse-templates/browse-templates.component';
+import { BrownyStaticComponent } from './browse-templates/browny-static/browny-static.component';
+import { LightThemeStaticComponent } from './browse-templates/light-theme-static/light-theme-static.component';
+import { DarkThemeStaticComponent } from './browse-templates/dark-theme-static/dark-theme-static.component';
+import { FixedContainerStaticComponent } from './browse-templates/fixed-container-static/fixed-container-static.component';
+import { FixedContainer2StaticComponent } from './browse-templates/fixed-container2-static/fixed-container2-static.component';
+import { FixedContainer3StaticComponent } from './browse-templates/fixed-container3-static/fixed-container3-static.component';
+import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
+import { ResetPasswordLinkComponent } from './reset-password-link/reset-password-link.component';
 
 @NgModule({
   declarations: [
@@ -60,21 +78,36 @@ import { BrownyComponent } from './cv-templates/browny/browny.component';
     VideosComponent,
     RegestrationComponent,
     LoginComponent,
-    NavbarScdComponent,
     FooterScdComponent,
     ContactUsComponent,
-    NavDashboardComponent,
-    EducationComponent,
-    ExperienceComponent,
     SkillsComponent,
-    ContactInformationComponent,
-    NewSectionComponent,
     FindJobComponent,
     JobDetailsComponent,
-    EmployerAccountComponent,
-    EmployeeAccountComponent,
     BrownyComponent,
-    BrownyComponent,
+    HalfsComponent,
+    FixedContainerComponent,
+    SelectTemplateComponent,
+    MyAccountComponent,
+    SideNavComponent,
+    ChangePasswordComponent,
+    MyPostsComponent,
+    PostDetailsComponent,
+    MyApplicationComponent,
+    DarkThemeComponent,
+    LightThemeComponent,
+    FixedContainer2Component,
+    FixedContainer3Component,
+    CvLinkComponent,
+    MyCvComponent,
+    BrowseTemplatesComponent,
+    BrownyStaticComponent,
+    LightThemeStaticComponent,
+    DarkThemeStaticComponent,
+    FixedContainerStaticComponent,
+    FixedContainer2StaticComponent,
+    FixedContainer3StaticComponent,
+    ForgetPasswordComponent,
+    ResetPasswordLinkComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +116,8 @@ import { BrownyComponent } from './cv-templates/browny/browny.component';
     ReactiveFormsModule,
     PopoverModule,
     MatDialogModule,
+    MatRippleModule,
+
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,
@@ -92,7 +127,9 @@ import { BrownyComponent } from './cv-templates/browny/browny.component';
     MatButtonModule,
     HttpClientModule,
     CommonModule,
-
+    MatSelectModule,
+    MaterialFileInputModule,
+    MatIconModule,
     MatInputModule,
 
     AppRoutingModule,
@@ -105,6 +142,6 @@ import { BrownyComponent } from './cv-templates/browny/browny.component';
   ],
 
   bootstrap: [AppComponent],
-  entryComponents: [NewSectionComponent],
+  entryComponents: [],
 })
 export class AppModule {}

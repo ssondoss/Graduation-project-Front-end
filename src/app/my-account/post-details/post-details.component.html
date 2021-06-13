@@ -1,0 +1,141 @@
+<div class="w-100 pb-5" style="min-height: 94vh">
+  <app-navbar></app-navbar>
+  <div class="container my-5 py-5">
+    <div class="row mx-0">
+      <div class="col-md-3 px-0 rounded h-100 border bg-white">
+        <side-nav></side-nav>
+      </div>
+
+      <div class="col-md-9 mr-auto mt-5 mt-md-0 px-0 px-md-4">
+        <div class="h5 mb-3">account Information</div>
+        <div class="rounded border bg-white rounded t-14">
+          <div class="px-md-4 px-3 pt-4">
+            <div class="h6 font-weight-bold">{{ postDetails.jobRole }}</div>
+            <div class="my-2">{{ postDetails.companyName }}</div>
+            <div class="my-2">
+              {{ postDetails.country }} , {{ postDetails.jobLocation }}
+            </div>
+            <div class="small">{{ postDetails.dateAndTime | date }}</div>
+          </div>
+          <hr />
+          <p class="px-md-4 px-3">
+            {{ postDetails.jobDescription }}
+          </p>
+          <hr />
+          <div class="px-md-4 px-3">
+            <div class="row mx-0">
+              <div class="col-6 pl-0">
+                <div class="font-weight-bold title">Employement Type</div>
+                <div class="mt-2">{{ postDetails.employementType }}</div>
+              </div>
+              <div class="col-6 pl-0">
+                <div class="font-weight-bold title">Experience Level</div>
+                <div class="mt-2">{{ postDetails.experienceLevel }}</div>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row mx-0 px-md-4 px-3">
+            <div class="font-weight-bold pl-0 title">Skills :</div>
+            <ul class="">
+              <li *ngFor="let skill of postDetails.skills">{{ skill }}</li>
+            </ul>
+          </div>
+          <hr />
+          <div class="row mx-0 px-md-4 px-3">
+            <div class="font-weight-bold pl-0 title">Qualifications :</div>
+            <ul class="">
+              <li *ngFor="let qualifaction of postDetails.qualifications">
+                {{ qualifaction }}
+              </li>
+            </ul>
+          </div>
+          <hr />
+          <div class="row mx-0 px-md-4 px-3">
+            <div class="font-weight-bold pl-0 my-auto title">Post Status :</div>
+            <div class="ml-2 w-auto">
+              <div *ngIf="!postDetails.status" class="mb-0 text-center w-100">
+                <span class="text-danger">CLOSED</span>
+                <small class="ml-2">(users can't see it anymore.)</small>
+              </div>
+              <div *ngIf="postDetails.status" class="mb-0 text-center w-100">
+                <span class="text-success">OPENED</span>
+                <small class="ml-2">(all the users can see it.)</small>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive p-md-4 p-3 border-top mt-4">
+            <div class="font-weight-bold mb-3 title">
+              Candidates Applications
+            </div>
+            <div
+              class="alert alert-danger"
+              *ngIf="applicationForPost.length == 0"
+            >
+              no applications yet.
+            </div>
+            <table
+              class="table table-bordered"
+              *ngIf="applicationForPost.length != 0"
+            >
+              <thead>
+                <tr class="text-center bg-scd small font-weight-normal">
+                  <th>candidate name</th>
+                  <th>application date</th>
+                  <th>view CV</th>
+                </tr>
+              </thead>
+              <tbody class="small text-center">
+                <tr *ngFor="let application of applicationForPost">
+                  <td>
+                    {{ application.user.fullName }}
+                  </td>
+                  <td>
+                    {{ application.appliedDate | date }}
+                  </td>
+                  <td>
+                    <a (click)="viewApplication(application)">
+                      <i
+                        *ngIf="application.viewedByPublisher == true"
+                        class="fa fa-eye t-23 text-muted"
+                      ></i>
+
+                      <i
+                        *ngIf="application.viewedByPublisher == false"
+                        class="color-main fa fa-eye t-23"
+                      ></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr />
+          <div class="px-4 pb-4">
+            <button
+              *ngIf="!postDetails.status"
+              (click)="changeJobPostStatus()"
+              class="btn btn-success w-100"
+            >
+              <span
+                ><i class="fa fa-check-circle mx-2" aria-hidden="true"></i> Open
+                This Post</span
+              >
+            </button>
+
+            <button
+              *ngIf="postDetails.status"
+              (click)="changeJobPostStatus()"
+              class="btn btn-danger w-100"
+            >
+              <i class="fa fa-times-circle mx-2" aria-hidden="true"></i>
+
+              <span>Close This Post</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-scd style="margin-top: 100%"> </footer-scd>

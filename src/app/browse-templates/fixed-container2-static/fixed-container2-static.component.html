@@ -1,0 +1,148 @@
+<span>
+  <div class="bg-linear main">
+    <div class="row mx-0 text-main py-4 font-weight-bold">
+      <div class="mx-auto nav-media" (click)="showAbout()"><a>about me</a></div>
+      <div class="mx-auto nav-media" (click)="showEducation()">
+        <a></a> education
+      </div>
+      <div class="mx-auto nav-media" (click)="showSkills()">skills</div>
+      <div class="mx-auto nav-media" (click)="showExperience()">
+        My Experience
+      </div>
+      <div class="mx-auto nav-media" (click)="showContact()">Contact me</div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pb-5 mt-300 pl-md-5 pt-xl-5"
+      *ngIf="about === true"
+    >
+      <div class="my-auto h-100">
+        <h2 class="mt-5 pt-5">Sondos Marashdeh</h2>
+        <p>Web Developer</p>
+        <div class="mt-5">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error
+          quidem, temporibus et blanditiis fuga modi adipisci ex debitis amet,
+          officia eaque tenetur!
+        </div>
+        <div class="row mx-0 pt-5 mt-xl-5">
+          <div class="mx-auto" *ngFor="let a of [0, 1, 2]">
+            <a class="socail" href="http://localhost:4200/" target="_blank">
+              <i class="fa fa-globe text-white fa-2x"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white py-5 pl-md-5 mt-xl-5"
+      *ngIf="education === true"
+    >
+      <div
+        class="row mx-0 rounded-lg shadow mb-5"
+        *ngFor="let j of [1, 2, 3, 4, 5, 6]"
+      >
+        <div class="p-3 bg-scd col-md-3 d-flex">
+          <div class="m-auto text-white">
+            apr/2012
+            <span class="text-white mx-1">-</span> may/2013
+          </div>
+        </div>
+        <div class="col-md-9 p-3 bg-white text-dark">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+          sit error modi. Magni dolor dolores, repudiandae atque suscipit
+          corrupti a, odio consequatur soluta autem fugiat.
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pl-md-5 py-5 mt-xl-5"
+      *ngIf="skills == true"
+    >
+      <div class="mx-auto row mx-0">
+        <div class="col-md-6 my-auto" *ngFor="let k of [0, 1, 2, 3, 4, 5]">
+          <div
+            class="p-3 shadow mb-4 bg-white rounded text-dark font-weight-bold"
+          >
+            Lorem ipsum dolor sit.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white py-5 mt-xl-5 pl-md-5"
+      *ngIf="experience === true"
+    >
+      <div
+        class="row mx-0 rounded-lg shadow mb-5"
+        *ngFor="let l of [0, 1, 2, 3, 4]"
+      >
+        <div class="py-3 bg-scd d-flex col-md-3">
+          <div class="m-auto text-white px-0">
+            may/2019
+            <span class="text-white mx-1">-</span> june/2021
+          </div>
+        </div>
+        <div class="col-md-9 p-3 bg-white text-dark">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio numquam
+          deleniti voluptatibus velit eum id, alias, similique aperiam sint
+          quibusdam reiciendis expedita magni quas reprehenderit, consequatur
+          ullam eligendi? Accusantium corporis officiis repellat obcaecati!
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pt-md-5 pl-md-5 mt-5"
+      *ngIf="contact === true"
+    >
+      <div class="text-left p-3 border rounded mb-3">
+        <i
+          class="fa fa-phone-square text-main mr-2 fa-2x"
+          aria-hidden="true"
+        ></i>
+        07799999999
+      </div>
+      <div class="text-left p-3 border rounded mb-3">
+        <i class="fa fa-envelope-o text-main mr-2 fa-2x" aria-hidden="true"></i
+        >email@gmail.com
+      </div>
+      <div class="text-left p-3 border rounded mb-3">
+        <i class="fa fa-map-marker text-main mr-2 fa-2x" aria-hidden="true"></i>
+        amman,jordan
+      </div>
+      <div class="pt-md-5 text-center">
+        <p class="pt-4 h6">
+          feel free to contact me in any time for more details or to have just
+          atalk :
+        </p>
+        <div class="text-center pt-4">
+          <a
+            [href]="'mailto:' + cvData.email"
+            target="_blank"
+            class="btn shadow mt-3 py-3 px-5 font-weight-bold bg-scd text-white"
+          >
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="py-5 img justifiy-content-center d-md-block"
+    [ngClass]="{ 'd-none': about == false }"
+  >
+    <!-- <div class="row mx-0 text-dark"><h4>about me</h4></div> -->
+
+    <video
+      src="../../../assets/talk-about-your-self.mp4"
+      title="talk about your self"
+      frameborder="0"
+      class="border-scd-10 m-0"
+      height="auto"
+      width="96%"
+      controls
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></video>
+    <!-- -->
+  </div>
+</span>

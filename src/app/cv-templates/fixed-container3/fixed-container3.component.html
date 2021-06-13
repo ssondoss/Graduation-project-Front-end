@@ -1,0 +1,141 @@
+<span *ngIf="cvData != null && cvData != undefined">
+  <div class="bg-linear main">
+    <div class="row mx-0 text-main py-4 font-weight-bold">
+      <div class="mx-auto nav-media" (click)="showAbout()"><a>about me</a></div>
+      <div class="mx-auto nav-media" (click)="showEducation()">
+        <a></a> education
+      </div>
+      <div class="mx-auto nav-media" (click)="showSkills()">skills</div>
+      <div class="mx-auto nav-media" (click)="showExperience()">
+        My Experience
+      </div>
+      <div class="mx-auto nav-media" (click)="showContact()">Contact me</div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pb-5 mt-300 pl-md-5 pt-xl-5"
+      *ngIf="about === true"
+    >
+      <div class="my-auto h-100">
+        <h2 class="mt-5 pt-5">{{ cvData.name }}</h2>
+        <p>{{ cvData.role }}</p>
+        <div class="mt-5">
+          {{ cvData.about }}
+        </div>
+        <div class="row mx-0 pt-5 mt-xl-5">
+          <div class="mx-auto" *ngFor="let link of cvData.userLinks">
+            <a class="socail" [href]="link.link" target="_blank">
+              <i [class]="'fa fa-' + link.icon" class="text-main t-25 fa-2x"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white py-5 pl-md-5 mt-xl-5"
+      *ngIf="education === true"
+    >
+      <div
+        class="row mx-0 rounded-lg shadow mb-5"
+        *ngFor="let edu of cvData.userEducation; let i = index"
+      >
+        <div class="p-3 bg-scd col-md-3 d-flex">
+          <div class="m-auto text-white">
+            {{ edu.startYear }} <span class="text-white mx-1">-</span>
+            {{ edu.endYear }}
+          </div>
+        </div>
+        <div class="col-md-9 p-3 bg-white text-dark">
+          {{ edu.description }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pl-md-5 py-5 mt-xl-5"
+      *ngIf="skills == true"
+    >
+      <div class="mx-auto row mx-0">
+        <div class="col-md-6 my-auto" *ngFor="let skill of cvData.userSkills">
+          <div
+            class="p-3 shadow mb-4 bg-white rounded text-dark font-weight-bold"
+          >
+            {{ skill }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white py-5 mt-xl-5 pl-md-5"
+      *ngIf="experience === true"
+    >
+      <div
+        class="row mx-0 rounded-lg shadow mb-5"
+        *ngFor="let exp of cvData.userExperience; let i = index"
+      >
+        <div class="py-3 bg-scd d-flex col-md-3">
+          <div class="m-auto text-white px-0">
+            {{ exp.startYear }} <span class="text-white mx-1">-</span>
+            {{ exp.endYear }}
+          </div>
+        </div>
+        <div class="col-md-9 p-3 bg-white text-dark">
+          {{ exp.description }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-md-9 text-center text-white pt-md-5 pl-md-5 mt-5"
+      *ngIf="contact === true"
+    >
+      <div class="text-left p-3 border rounded mb-3">
+        <i
+          class="fa fa-phone-square text-main mr-2 fa-2x"
+          aria-hidden="true"
+        ></i>
+        {{ cvData.phone }}
+      </div>
+      <div class="text-left p-3 border rounded mb-3">
+        <i class="fa fa-envelope-o text-main mr-2 fa-2x" aria-hidden="true"></i
+        >{{ cvData.email }}
+      </div>
+      <div class="text-left p-3 border rounded mb-3">
+        <i class="fa fa-map-marker text-main mr-2 fa-2x" aria-hidden="true"></i>
+        {{ cvData.address }}
+      </div>
+      <div class="pt-md-5 text-center">
+        <p class="pt-4 h6">
+          feel free to contact me in any time for more details or to have just
+          atalk :
+        </p>
+        <div class="text-center pt-4">
+          <a
+            [href]="'mailto:' + cvData.email"
+            target="_blank"
+            class="btn shadow mt-3 py-3 px-5 font-weight-bold bg-scd text-white"
+          >
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="py-5 img justifiy-content-center d-md-block"
+    [ngClass]="{ 'd-none': about == false }"
+  >
+    <!-- <div class="row mx-0 text-dark"><h4>about me</h4></div> -->
+
+    <video
+      [src]="getVideoSrc(cvData.video)"
+      title="talk about your self"
+      frameborder="0"
+      class="border-scd-10 m-0"
+      height="auto"
+      width="96%"
+      controls
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></video>
+    <!-- -->
+  </div>
+</span>

@@ -1,26 +1,33 @@
 <app-navbar></app-navbar>
 
 <div
-  class="row w-100 px-3 justify-content-center mx-0"
+  *ngIf="isSettedUp"
+  class="
+    row
+    w-100
+    px-3
+    justify-content-center
+    mx-0
+    my-5
+    flex-column-reverse flex-lg-row
+  "
   style="min-height: 90vh"
 >
   <form
     [formGroup]="personalInformationForm"
-    class="p-md-5 px-3 shadow bg-white col-xl-6 col-lg-8 col-md-10 m-auto h-100"
+    class="p-md-5 p-3 shadow bg-white col-xl-6 col-lg-7 m-auto h-100 rounded"
   >
-    <div class="row mx-0 bg-light2 p-3">
+    <div class="row mx-0 bg-light2 p-3" (click)="showPersonalInformation()">
       <div class="text-left my-auto h5">Personal Information</div>
       <div class="ml-auto my-auto">
         <i
           *ngIf="personalInformation === false"
           class="fa fa-chevron-down"
           aria-hidden="true"
-          (click)="showPersonalInformation()"
         ></i>
 
         <i
           *ngIf="personalInformation === true"
-          (click)="showPersonalInformation()"
           class="fa fa-chevron-up"
           aria-hidden="true"
         ></i>
@@ -28,80 +35,97 @@
     </div>
     <div *ngIf="personalInformation === true">
       <div class="row mx-0 mt-4">
-        <div class="form-group col-lg-6 px-0">
-          <label for=""> Name <span class="text-danger">*</span></label>
-          <input
-            type="text"
-            class="form-control"
-            required
-            formControlName="name"
-          />
-          <mat-error
-            *ngIf="
-              personalInformationForm.controls.name.errors?.required &&
-              personalInformationForm.controls.name.touched
-            "
-          >
-            this field is requireed
-          </mat-error>
+        <div class="col-lg-6 pl-lg-0 pr-lg-2 px-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput required formControlName="name" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.name.errors?.required &&
+                personalInformationForm.controls.name.touched
+              "
+            >
+              this field is required
+            </mat-error>
+          </mat-form-field>
         </div>
-        <div class="form-group col-lg-6 px-0 pl-lg-2">
-          <label for="">Job role <span class="text-danger">*</span></label>
-          <input
-            type="text"
-            class="form-control"
-            required
-            formControlName="role"
-          />
-          <mat-error
-            *ngIf="
-              personalInformationForm.controls.role.errors?.required &&
-              personalInformationForm.controls.role.touched
-            "
-          >
-            this field is requireed
-          </mat-error>
+        <div class="col-lg-6 pr-lg-0 px-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Job role</mat-label>
+            <input matInput required formControlName="role" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.role.errors?.required &&
+                personalInformationForm.controls.role.touched
+              "
+            >
+              this field is required
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
 
-      <div class="form-group col-lg-12 px-0 mt-4">
-        <label
-          >introductory video
-          <small
-            >(this video will be showed as first thing to the employers)
-            <span class="text-danger">*</span></small
-          ></label
-        >
-        <div class="custom-file">
-          <input
-            formControlName="video"
-            type="file"
-            class="custom-file-input"
-            id="validatedCustomFile"
-            required
-          />
-          <label class="custom-file-label">Choose file...</label>
+      <mat-form-field class="w-100" appearance="outline">
+        <div *ngIf="uploadedVideoName.length > 0" class="text-center">
+          <video
+            [src]="getVideoSrc(uploadedVideoName)"
+            controls
+            height="300"
+            width="90%"
+          ></video>
         </div>
-      </div>
-      <div class="form-group mt-4">
-        <label for=""
-          >write about yourself <span class="text-danger">*</span></label
-        >
-        <textarea
-          rows="3"
+        <mat-label>introductry video </mat-label>
+        <ngx-mat-file-input
+          formControlName="video"
+          accept="video/*"
+          (change)="uploadVideo($event)"
           required
-          class="w-100 border-grey"
-          formControlName="about"
-        ></textarea>
+        ></ngx-mat-file-input>
+        <mat-icon matSuffix
+          ><i class="fa fa-folder-open color-main" aria-hidden="true"></i>
+        </mat-icon>
+      </mat-form-field>
+      <div
+        class="color-main w-100 mb-4 undelined-hover"
+        aria-hidden="true"
+        [popoverOnHover]="false"
+        [popover]="myPopovernotification"
+      >
+        what is introductry video?
+      </div>
+      <popover-content
+        #myPopovernotification
+        placement="top"
+        class=""
+        [animation]="true"
+        [closeOnClickOutside]="true"
+      >
+        <div class="p-3">
+          this video is an important component to add to your CV , try to
+          include in it abreive summary answering common interviews questions
+          like :
+          <div class="text-muted mt-2">tell me about your self ?</div>
+          <div class="text-muted mt-2">What are your strengths ?</div>
+          <div class="text-muted mt-2">what's your weak points ?</div>
+
+          <div class="text-muted mt-2">
+            Where do you see yourself in five years?
+          </div>
+        </div>
+      </popover-content>
+
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>write about yourself</mat-label>
+        <textarea matInput formControlName="about" required></textarea>
         <mat-error
           *ngIf="
             personalInformationForm.controls.about.errors?.required &&
             personalInformationForm.controls.about.touched
           "
         >
-          this field is requireed
+          this field is required
         </mat-error>
-      </div>
+      </mat-form-field>
 
       <div class="form-group px-0 mt-4">
         <div class="row mx-0">
@@ -110,149 +134,168 @@
           >
         </div>
       </div>
-      <div class="row mx-0 mt-3" *ngFor="let link of links">
-        <!-- <div class="form-group col-lg-3 px-0">
-          <input type="text" class="form-control" placeholder="name" />
-        </div> -->
-        <div class="form-group col-lg-8 px-0 px-lg-2">
+      <div class="row mx-0 mt-3 px-0" *ngFor="let link of links">
+        <mat-form-field
+          class="col-lg-8 pl-lg-0 pr-lg-2 px-0"
+          appearance="outline"
+        >
+          <mat-label>Link</mat-label>
           <input
-            type="text"
-            class="form-control"
-            placeholder="Link"
+            matInput
             #linkValue
+            [value]="link.link"
             (change)="addLinkChange(link.id, linkValue.value)"
           />
-        </div>
-        <div class="form-group col-lg-3 col-9 px-0">
-          <div *ngIf="link.icon != ''">
-            <i
-              *ngIf="link.icon == 'facebook'"
-              class="fa fa-facebook-official mx-2 fa-2x"
-            ></i>
-          </div>
-          <div class="dropdown" *ngIf="link.icon == ''">
-            <button
-              type="button"
-              class="btn border text-muted dropdown-toggle"
-              data-toggle="dropdown"
-            >
-              Link Icon
-            </button>
+        </mat-form-field>
 
-            <div class="dropdown-menu">
-              <a
-                class="p-3 text-left border-bottom dropdown-item"
-                (click)="addIcon(link.id, 'facebook')"
-              >
+        <mat-form-field class="col-lg-3 col-10 px-0" appearance="outline">
+          <mat-label>Select</mat-label>
+          <mat-select [(value)]="link.icon">
+            <mat-option value="facebook" (click)="addIcon(link.id, 'facebook')">
+              <a>
                 <i class="fa fa-facebook-official mx-2" aria-hidden="true"></i>
-                facebook
+                Facebook
               </a>
-              <a
-                class="p-3 text-left border-bottom dropdown-item"
-                (click)="addIcon(link.id, 'linkedin')"
-              >
-                <i class="fa fa-linkedin-square mx-2" aria-hidden="true"></i>
-                linked in
-              </a>
-              <a
-                class="p-3 text-left border-bottom dropdown-item"
-                (click)="addIcon(link.id, 'github')"
-              >
+            </mat-option>
+            <mat-option value="github" (click)="addIcon(link.id, 'github')">
+              <a>
                 <i class="fa fa-github mx-2"></i>
-                github
-              </a>
-              <a
-                class="p-3 text-left border-bottom dropdown-item"
-                (click)="addIcon(link.id, 'youtube')"
-              >
-                <i class="fa fa-youtube mx-2"></i>
-                youtube
-              </a>
-            </div>
-          </div>
-        </div>
+                GitHub
+              </a></mat-option
+            >
 
-        <div class="col-lg-1 col-3 mt-1 text-left">
+            <mat-option value="youtube" (click)="addIcon(link.id, 'youtube')">
+              <a>
+                <i class="fa fa-youtube mx-2"></i>
+                YouTube
+              </a></mat-option
+            >
+            <mat-option value="linkedin" (click)="addIcon(link.id, 'linkedin')">
+              <a>
+                <i class="fa fa-linkedin-square mx-2" aria-hidden="true"></i>
+                LinkedIn
+              </a>
+            </mat-option>
+            <mat-option value="globe" (click)="addIcon(link.id, 'globe')">
+              <a>
+                <i class="fa fa-globe mx-2" aria-hidden="true"></i>
+                others
+              </a>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="col-lg-1 col-2 my-auto text-right px-0">
           <a (click)="deleteLink(link.id)">
-            <i class="fa fa-trash text-danger t-23"></i
+            <i class="fa fa-minus-circle text-danger"></i
           ></a>
         </div>
       </div>
       <div class="col-12 px-0 mt-3">
-        <a class="text-success" (click)="addLink()">
+        <button class="btn btn-outline-success w-100" (click)="addLink()">
           <i class="fa fa-plus t-8" aria-hidden="true"></i>
-          add another link
-        </a>
+          add link
+        </button>
       </div>
     </div>
-    <div class="row mx-0 bg-light2 p-3 mt-4">
+    <div class="row mx-0 bg-light2 p-3 mt-4" (click)="showEducation()">
       <div class="text-left my-auto h5">Education</div>
       <div class="ml-auto my-auto">
         <i
           *ngIf="educationDiv === false"
           class="fa fa-chevron-down"
           aria-hidden="true"
-          (click)="showEducation()"
         ></i>
 
         <i
           *ngIf="educationDiv === true"
-          (click)="showEducation()"
           class="fa fa-chevron-up"
           aria-hidden="true"
         ></i>
       </div>
     </div>
     <div *ngIf="educationDiv === true">
-      <div class="pt-4" *ngFor="let field of eduactionFields">
+      <div
+        class="p-md-4 p-3 my-4 border rounded"
+        *ngFor="let field of eduactionFields"
+      >
         <div class="form-group px-0 row mx-0">
-          <div class="form-group col-6 px-0">
-            <mat-form-field appearance="fill">
-              <mat-label>Month and Year</mat-label>
-              <input matInput [matDatepicker]="dp" />
+          <div class="col-6 pl-0 pr-2">
+            <mat-form-field class="w-100 h-100" appearance="outline">
+              <mat-label>starting month and year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startEducationDP"
+                [formControl]="getDate(field.startYear)"
+              />
               <mat-datepicker-toggle
                 matSuffix
-                [for]="dp"
+                [for]="startEducationDP"
               ></mat-datepicker-toggle>
               <mat-datepicker
-                #dp
+                #startEducationDP
                 startView="multi-year"
+                (yearSelected)="chosenYearHandler($event, startEducationDate)"
+                (monthSelected)="
+                  chosenMonthHandlerStartEdu(
+                    $event,
+                    startEducationDP,
+                    startEducationDate,
+                    field.id
+                  )
+                "
                 panelClass="example-month-picker"
               >
               </mat-datepicker>
             </mat-form-field>
-
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Start Year"
-              #startDate
-              (change)="addStartDate(field.id, startDate.value)"
-            />
           </div>
-          <div class="form-group col-6 px-0 pl-2">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="End Year"
-              #endDate
-              (change)="addEndDate(field.id, endDate.value)"
-            />
+
+          <div class="col-6 px-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>ending month and year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endEducationDP"
+                [formControl]="getDate(field.endYear)"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endEducationDP"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #endEducationDP
+                startView="multi-year"
+                (yearSelected)="chosenYearHandler($event, endEducationDate)"
+                (monthSelected)="
+                  chosenMonthHandlerEndEdu(
+                    $event,
+                    endEducationDP,
+                    endEducationDate,
+                    field.id
+                  )
+                "
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
 
-        <div class="form-group col-lg-12 px-0">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>description</mat-label>
           <textarea
-            type="text"
-            class="form-control"
-            rows="2"
-            placeholder="description"
+            matInput
             #description
+            [value]="field.description"
             (change)="addDescription(field.id, description.value)"
           ></textarea>
-        </div>
-        <div class="text-right pb-3">
-          <small class="text-danger"> delete this field</small>
+        </mat-form-field>
+
+        <div class="text-right">
+          <small class="text-danger" (click)="deleteEducationField(field.id)"
+            ><i class="fa fa-minus-circle" aria-hidden="true"></i> delete this
+            field</small
+          >
         </div>
       </div>
       <div class="py-2"></div>
@@ -261,185 +304,302 @@
         (click)="addEducationField()"
       >
         <i class="fa fa-plus t-8" aria-hidden="true"></i>
-        Add another field
+        add field
       </button>
     </div>
-    <div class="row mx-0 bg-light2 p-3 mt-4">
+    <div class="row mx-0 bg-light2 p-3 mt-4" (click)="showExperienceDiv()">
       <div class="text-left my-auto h5">Experience</div>
       <div class="ml-auto my-auto">
         <i
           *ngIf="experienceDiv === false"
           class="fa fa-chevron-down"
           aria-hidden="true"
-          (click)="showExperienceDiv()"
         ></i>
 
         <i
           *ngIf="experienceDiv === true"
-          (click)="showExperienceDiv()"
           class="fa fa-chevron-up"
           aria-hidden="true"
         ></i>
       </div>
     </div>
     <div *ngIf="experienceDiv === true">
-      <div *ngFor="let field of experienceFields">
+      <div
+        class="p-md-4 p-3 my-4 border"
+        *ngFor="let field of experienceFields"
+      >
         <div class="form-group px-0 row mx-0">
-          <label for="" class="col-lg-3 my-auto pl-0 pb-3"> start date :</label>
-          <div class="form-group col-lg-4 col-5 px-0">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="month"
-              #startMonth
-              (change)="addStartMonthExperience(field.id, startMonth.value)"
-            />
+          <div class="col-6 pl-0 pr-2">
+            <mat-form-field class="w-100 h-100" appearance="outline">
+              <mat-label>Starting month and year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startExperienceDP"
+                [formControl]="getDate(field.startYear)"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="startExperienceDP"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #startExperienceDP
+                startView="multi-year"
+                (yearSelected)="chosenYearHandler($event, startExperienceDate)"
+                (monthSelected)="
+                  chosenMonthHandlerStartExp(
+                    $event,
+                    startExperienceDP,
+                    startExperienceDate,
+                    field.id
+                  )
+                "
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
           </div>
-          <div class="form-group col-lg-5 col-7 px-0 pl-2">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="year"
-              #startYear
-              (change)="addStartYearExperience(field.id, startYear.value)"
-            />
-          </div>
-        </div>
-        <div class="form-group px-0 row mx-0">
-          <label for="" class="col-lg-3 my-auto pl-0 pb-3"> end date :</label>
-          <div class="form-group col-lg-4 col-5 px-0">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="month"
-              #endMonth
-              (change)="addEndMonthExperience(field.id, endMonth.value)"
-            />
-          </div>
-          <div class="form-group col-lg-5 col-7 px-0 pl-2">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="year"
-              #endYear
-              (change)="addEndYearExperience(field.id, endYear.value)"
-            />
+
+          <div class="col-6 px-0">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Ending month and year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endExperienceDP"
+                [formControl]="getDate(field.endYear)"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endExperienceDP"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #endExperienceDP
+                startView="multi-year"
+                (yearSelected)="chosenYearHandler($event, endExperienceDate)"
+                (monthSelected)="
+                  chosenMonthHandlerEndExp(
+                    $event,
+                    endExperienceDP,
+                    endExperienceDate,
+                    field.id
+                  )
+                "
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
 
-        <div class="form-group col-lg-12 px-0">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="description"
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>description</mat-label>
+          <textarea
+            matInput
             #description
+            [value]="field.description"
             (change)="addDescriptionExperience(field.id, description.value)"
-          />
-        </div>
-        <div class="text-right pb-3">
-          <small class="text-danger"> delete this field</small>
+          ></textarea>
+        </mat-form-field>
+
+        <div class="text-right">
+          <small class="text-danger" (click)="deleteExperienceField(field.id)"
+            ><i class="fa fa-minus-circle" aria-hidden="true"></i> delete this
+            field</small
+          >
         </div>
       </div>
       <div class="py-2"></div>
       <button
-        class="btn-outline-success btn w-100"
+        class="btn btn-outline-success w-100"
         (click)="addExperienceField()"
       >
         <i class="fa fa-plus t-8" aria-hidden="true"></i>
-        Add another field
+        add field
       </button>
     </div>
-    <div class="row mx-0 bg-light2 p-3 mt-4">
+    <div class="row mx-0 bg-light2 p-3 mt-4" (click)="showSkills()">
       <div class="text-left my-auto h5">skills</div>
       <div class="ml-auto my-auto">
         <i
           *ngIf="skillsDiv === false"
           class="fa fa-chevron-down"
           aria-hidden="true"
-          (click)="showSkills()"
         ></i>
 
         <i
           *ngIf="skillsDiv === true"
-          (click)="showSkills()"
           class="fa fa-chevron-up"
           aria-hidden="true"
         ></i>
       </div>
     </div>
 
-    <div *ngIf="skillsDiv === true">
-      <div *ngFor="let skill of skills" class="row mx-0 mt-4">
-        <div class="form-group col-10 pl-0">
-          <input
+    <div *ngIf="skillsDiv === true" class="pt-4">
+      <div *ngFor="let skill of skills" class="row mx-0">
+        <div class="form-group col-11 pl-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Skill</mat-label>
+            <input
+              matInput
+              [value]="skill.skill"
+              #skillValue
+              (change)="skillChange(skill.id, skillValue.value)"
+            />
+          </mat-form-field>
+          <!-- <input
             type="text"
             class="form-control"
+            [value]="skill.skill"
             placeholder="skill"
             #skillValue
-            (change)="skillChange(skill.id, skillValue.value)"
-          />
+          /> -->
         </div>
-        <div class="col-2 my-auto">
-          <div class="text-right pb-3" (click)="deleteSkill(skill.id)">
-            <small class="text-danger"> delete </small>
+        <div class="col-1 my-auto px-0">
+          <div class="text-right px-0 pb-4" (click)="deleteSkill(skill.id)">
+            <i class="fa fa-minus-circle text-danger"></i>
           </div>
         </div>
       </div>
 
-      <div class="py-1"></div>
       <button (click)="addSkill()" class="btn btn-outline-success w-100">
         <i class="fa fa-plus t-8" aria-hidden="true"></i>
-        add another skill
+        add skill
       </button>
     </div>
-    <div class="row mx-0 bg-light2 p-3 mt-4">
+    <div class="row mx-0 bg-light2 p-3 mt-4" (click)="showContactInfo()">
       <div class="text-left my-auto h5">Contact Information</div>
       <div class="ml-auto my-auto">
         <i
           *ngIf="contactDiv === false"
           class="fa fa-chevron-down"
           aria-hidden="true"
-          (click)="showContactInfo()"
         ></i>
 
         <i
           *ngIf="contactDiv === true"
-          (click)="showContactInfo()"
           class="fa fa-chevron-up"
           aria-hidden="true"
         ></i>
       </div>
     </div>
     <div *ngIf="contactDiv === true">
-      <div class="form-group col-lg-12 px-0 pt-4">
-        <label for=""> E-mail</label>
-        <input type="text" class="form-control" formControlName="email" />
-      </div>
-      <div class="form-group col-lg-12 px-0 mt-3">
-        <label for=""> address</label>
-        <input type="text" class="form-control" formControlName="address" />
-      </div>
-      <div class="row mx-0 mt-3">
-        <div class="form-group col-lg-6 px-0">
-          <label for="">Mobile Number</label>
-
-          <input type="text" class="form-control" formControlName="phone" />
+      <div class="row mx-0 mt-5">
+        <div class="form-group col-lg-6 px-0 pl-lg-0 pr-lg-2">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput required formControlName="phone" maxlength="12" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.phone.errors?.required &&
+                personalInformationForm.controls.phone.touched
+              "
+            >
+              this field is required
+            </mat-error>
+          </mat-form-field>
         </div>
-        <!-- <div class="col-lg-6 my-auto">
-          <a class="color2">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            add another number
-          </a>
-        </div> -->
+        <div class="form-group col-lg-6 px-0">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput required formControlName="email" />
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.email.errors?.required &&
+                personalInformationForm.controls.email.touched
+              "
+            >
+              this field is required
+            </mat-error>
+            <mat-error
+              *ngIf="
+                personalInformationForm.controls.email.hasError('invalidEmail')
+              "
+            >
+              invalid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-group col-lg-12 px-0">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput required formControlName="address" />
+          <mat-error
+            *ngIf="
+              personalInformationForm.controls.address.errors?.required &&
+              personalInformationForm.controls.address.touched
+            "
+          >
+            this field is required
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
-    <!-- <button class="btn btn2-bordered w-100 my-5">ADD NEW SECTION</button> -->
     <div class="mt-5 text-center justify-content-center row mx-0">
-      <button class="btn btn-bordered mx-2 w-100" routerLink="/education">
+      <button
+        *ngIf="!filledCv"
+        class="btn btn-main mx-2 w-100"
+        (click)="sendPersonalInformation()"
+      >
         Next
+      </button>
+      <button
+        *ngIf="filledCv"
+        class="btn btn-bordered mx-2 w-100"
+        (click)="sendPersonalInformation()"
+      >
+        Update CV Information
       </button>
     </div>
   </form>
+  <div class="col-xl-4 col-lg-5 pl-lg-4 m-auto px-0 justify-content-center">
+    <div class="row mb-5 mx-0 px-0 justify-content-center">
+      <div class="circle bg-white d-flex shadow">
+        <img
+          src="../../assets/cv-build1.svg"
+          alt=""
+          class="m-auto"
+          width="auto"
+        />
+      </div>
+      <div class="my-auto ml-2 bg-white shadow p-3 rounded w-auto text-head">
+        insert your CV information
+      </div>
+    </div>
+    <div class="row mx-0 mb-5 px-0 justify-content-center">
+      <div class="circle bg-white d-flex shadow">
+        <img src="../../assets/select.svg" alt="" class="m-auto" width="auto" />
+      </div>
+      <div
+        class="
+          text-head
+          my-auto
+          ml-2
+          bg-white
+          shadow
+          p-3
+          rounded
+          w-auto
+          justify-content-center
+        "
+      >
+        choose your desired template
+      </div>
+    </div>
+    <div class="row mx-0 mb-5 px-0 justify-content-center">
+      <div class="circle bg-white d-flex shadow">
+        <img
+          src="../../assets/complete.svg"
+          alt=""
+          class="m-auto"
+          width="auto"
+        />
+      </div>
+      <div class="my-auto ml-2 bg-white shadow p-3 rounded w-auto text-head">
+        receive your CV link , share it ultimately
+      </div>
+    </div>
+  </div>
 </div>
 <footer-scd></footer-scd>
 

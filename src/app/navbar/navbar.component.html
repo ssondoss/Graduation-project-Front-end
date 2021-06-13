@@ -16,34 +16,204 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
       <ul class="navbar-nav ml-auto">
-        <!-- <li class="nav-item mr-5">
-          <a class="nav-link" routerLink="/"> Find ajob </a>
-        </li>
         <li class="nav-item mr-5">
           <a class="nav-link" routerLink="/employee"> Build CV </a>
-        </li> -->
+        </li>
         <li class="nav-item mr-5">
-          <a class="nav-link" routerLink="/"> Our templates </a>
+          <a class="nav-link" routerLink="/find-job"> Find ajob </a>
+        </li>
+        <!-- <li class="nav-item mr-5" *ngIf="userSession.isLoggedIn">
+          <a class="nav-link" routerLink="/employee"> Build CV </a>
+        </li> -->
+        <li class="nav-item mr-5" *ngIf="!userSession.isLoggedIn">
+          <a class="nav-link" routerLink="/contact-us"> Contact Us </a>
         </li>
         <!-- <li class="nav-item mr-5">
-          <a class="nav-link" routerLink="/browse"> Browse </a>
-        </li>
-        <li class="nav-item mr-5">
-          <a class="nav-link" routerLink="/employer"> Post ajob</a>
+          <a class="nav-link" routerLink="/browse">
+            Browse Candidates Videos
+          </a>
         </li> -->
-
-        <li class="nav-item active mr-5">
-          <a class="nav-link" routerLink="/contact-us"> Contact us </a>
+        <li class="nav-item mr-5" *ngIf="userSession.isLoggedIn">
+          <a class="nav-link" routerLink="/employer"> Post ajob</a>
         </li>
-        <li class="nav-item active mr-5">
-          <button class="btn text-white border" routerLink="/regestration">
+
+        <div
+          class="dropdown show nav-item active mr-5"
+          *ngIf="userSession.isLoggedIn"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            my account
+          </a>
+
+          <div
+            class="dropdown-menu mb-4 py-0"
+            aria-labelledby="dropdownMenuLink"
+          >
+            <a class="dropdown-item py-3 border-bottom" routerLink="/my-account"
+              >my account</a
+            >
+            <!-- <a
+              class="dropdown-item py-3 border-bottom"
+              routerLink="/change-password"
+              >change password</a
+            >
+
+            <a class="dropdown-item py-3 border-bottom" routerLink="/my-posts"
+              >my job posts</a
+            >
+            <a
+              class="dropdown-item py-3 border-bottom"
+              routerLink="/my-applications"
+              >my applications</a
+            >
+            <a class="dropdown-item py-3 border-bottom" routerLink="/my-cv"
+              >my CV</a
+            > -->
+
+            <!-- <a class="dropdown-item py-2" routerLink="/employee">build CV</a> -->
+            <a class="dropdown-item py-3 border-bottom" routerLink="/contact-us"
+              >contact us</a
+            >
+            <a class="dropdown-item py-3" (click)="userSession.logout()"
+              >logout</a
+            >
+          </div>
+        </div>
+        <div class="dropdown show nav-item active mr-5">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Browse
+          </a>
+
+          <div class="dropdown-menu mb-4" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item py-2" routerLink="/browse">
+              Candidates Videos
+            </a>
+            <a class="dropdown-item py-2" routerLink="/browse-templates">
+              Our templates</a
+            >
+          </div>
+        </div>
+
+        <div class="dropdown show nav-item active d-block d-lg-none">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownNotifications"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            notifications
+          </a>
+
+          <div
+            class="dropdown-menu mb-4 pb-0"
+            aria-labelledby="dropdownNotifications"
+          >
+            <a
+              class="dropdown-item py-2 border-bottom"
+              *ngFor="let notification of newJobNotifications"
+            >
+              <span
+                routerLink="/job-details"
+                class="bg-primary"
+                [queryParams]="{ id: notification.jobPost.id }"
+              >
+                <div class="text-dark font-weight-bold row mx-0">
+                  {{ notification.jobPost.jobRole }}
+                </div>
+                <div class="text-muted row mx-0 mt-1 small">
+                  {{ notification.jobPost.companyName }}
+                </div>
+                <div class="text-muted row mx-0 mt-1 small">
+                  {{ notification.jobPost.country }} ,
+                  {{ notification.jobPost.jobLocation }}
+                </div>
+                <div class="text-muted small mt-2">
+                  {{ notification.jobPost.dateAndTime | date }}
+                </div>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <li *ngIf="userSession.isLoggedIn">
+          <a
+            class="nav-link d-lg-block d-none"
+            aria-hidden="true"
+            [popoverOnHover]="false"
+            [popover]="myPopovernotification"
+          >
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+            <span class="badge badge-pill badge-success">{{
+              newJobNotifications.length
+            }}</span>
+          </a>
+        </li>
+        <popover-content
+          #myPopovernotification
+          placement="bottom "
+          class=""
+          [animation]="true"
+          [closeOnClickOutside]="true"
+        >
+          <ul class="no-bullets text-left ml-0 pl-0 w-100">
+            <li
+              *ngIf="newJobNotifications.length == 0"
+              class="p-3 text-left text-success mb-0"
+            >
+              <span> you don't have any notifications yet </span>
+            </li>
+            <li
+              class="p-3 text-left border-bottom"
+              *ngFor="let notification of newJobNotifications"
+            >
+              <span
+                routerLink="/job-details"
+                class="bg-primary"
+                [queryParams]="{ id: notification.jobPost.id }"
+              >
+                <div class="text-dark font-weight-bold row mx-0">
+                  {{ notification.jobPost.jobRole }}
+                </div>
+                <div class="text-muted row mx-0 mt-1 small">
+                  {{ notification.jobPost.companyName }}
+                </div>
+                <div class="text-muted row mx-0 mt-1 small">
+                  {{ notification.jobPost.country }} ,
+                  {{ notification.jobPost.jobLocation }}
+                </div>
+                <div class="text-muted small mt-2">
+                  {{ notification.jobPost.dateAndTime | date }}
+                </div>
+              </span>
+            </li>
+          </ul>
+        </popover-content>
+        <li class="nav-item active mr-5" *ngIf="!userSession.isLoggedIn">
+          <button class="btn btn-white" routerLink="/regestration">
             Join us
           </button>
         </li>
-        <li class="nav-item active mr-5">
-          <button class="btn text-white border" routerLink="/regestration">
-            Sign in
-          </button>
+        <li class="nav-item active mr-5" *ngIf="!userSession.isLoggedIn">
+          <button class="btn btn-white" routerLink="/login">Sign in</button>
         </li>
       </ul>
     </div>

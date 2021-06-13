@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserSessionService } from '../user-session.service';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +13,10 @@ export class HomeComponent implements OnInit {
   registerationFormGroup: FormGroup;
 
   constructor(
+    private userSession: UserSessionService,
     public firestore: AngularFirestore,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public router: Router
   ) {}
   ngOnInit(): void {
     this.registerationFormGroup = this.formBuilder.group({
@@ -58,5 +62,10 @@ export class HomeComponent implements OnInit {
         alert('USER ADDED !');
       }
     });
+  }
+  startMyCv() {
+    if (this.userSession.isLoggedIn) {
+      this.router.navigate(['/employee']);
+    } else this.router.navigate(['/login']);
   }
 }

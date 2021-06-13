@@ -1,8 +1,14 @@
 <app-navbar></app-navbar>
 <section style="clip-path: ellipse(76% 57% at 50% 43%); height: 640px">
-  <div class="row mx-0 bg-light" style="height: 640px">
+  <div class="row mx-0 bg-scd" style="height: 640px">
     <div
-      class="col-lg-4 mx-lg-auto mx-md-5 mx-3 text-center my-auto d-none d-lg-block"
+      class="
+        col-lg-4
+        mx-lg-auto mx-md-5 mx-3
+        text-center
+        my-auto
+        d-none d-lg-block
+      "
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
         <g id="freepik--background-simple--inject-4">
@@ -512,7 +518,7 @@
         </g>
       </svg>
     </div>
-    <div class="col-lg-4 col-md-8 m-auto mt-5 pt-3">
+    <div class="col-lg-4 col-md-8 m-md-auto mt-5 mx-auto pt-5 pt-md-0">
       <div class="m-auto px-2">
         <div class="p-3 rounded shadow d-flex home-nav" routerLink="/employer">
           <span class="my-auto t-18">Post ajob</span>
@@ -687,21 +693,23 @@
     </div>
   </div>
 </section>
-<div class="p-lg-5 p-3 mt-0 mt-lg-5">
-  <div class="col-md-6 offset-md-3">
+<div class="p-xl-5 p-3 mt-0 mt-xl-4">
+  <div class="col-xl-6 mx-auto">
     <div class="text-center mt-5 row mx-0 justify-content-center">
-      <h3 class="letter-spacing text-uppercase">
-        <span class="text-success my-auto">Our</span> Services
+      <h3 class="letter-spacing text-uppercase t-media">
+        <span class="color-main my-auto">Our</span> Services
       </h3>
     </div>
     <p class="our-services text-center mb-5 text-grey">
-      Are you looking for a job ? or you are an employee and looking for a
-      better opportunity ? here we present the right features :
+      Are you looking for a job ? Are you an employee and looking for a better
+      job opportunity ? Do you have a job opportunity and you want to hire the
+      right person for it as soon as possible ? here we present the right
+      features :
     </p>
   </div>
   <div class="row mx-0">
     <div class="col-xl-3 col-md-4 mx-auto mt-3">
-      <div class="border p-3 p-lg-4 rounded-lg mx-auto our-services h-auto">
+      <div class="border p-3 p-lg-4 rounded-lg mx-auto our-services h-100">
         <div class="row mx-0">
           <div class="d-flex bg2" style="border-radius: 50%">
             <img
@@ -712,13 +720,15 @@
               class="m-auto p-3"
             />
           </div>
-          <h5 class="mt-4 mx-3">professional CV</h5>
+          <h5 class="mt-4 mx-3">Professional CVs</h5>
         </div>
         <hr />
-        Build Your professinal CV as international website in multiple themes
-        and templtes .
+        Build your professinal CV as international daynamic website in multiple
+        themes and templates .
         <br />
-        <button class="btn btn-outline-success btn-sm mt-4">HOW ?</button>
+        <button class="btn btn-bordered btn-sm mt-4" routerLink="/employee">
+          Start Now ?
+        </button>
       </div>
     </div>
     <div class="col-xl-3 col-md-4 mx-auto mt-3">
@@ -733,12 +743,14 @@
               class="m-auto p-3"
             />
           </div>
-          <h5 class="mt-4 mx-3">Right opportunities</h5>
+          <h5 class="mt-4 mx-3">Right Opportunities</h5>
         </div>
         <hr />
-        get connected with the right people and get offers that mathches your
-        skills . <br />
-        <button class="btn btn-outline-success btn-sm mt-4">HOW ?</button>
+        Get connected with the all the people in the world, and get offers that
+        mathches your skills . <br />
+        <button class="btn btn-bordered btn-sm mt-4" routerLink="/employee">
+          Start Now ?
+        </button>
       </div>
     </div>
     <div class="col-xl-3 col-md-4 mx-auto mt-3">
@@ -753,42 +765,48 @@
               class="m-auto p-3"
             />
           </div>
-          <h5 class="mt-4 mx-3">Right recruitment</h5>
+          <h5 class="mt-4 mx-3">Right Recruitment</h5>
         </div>
         <hr />
-        browse others personal introduction videos and CVs , and find the people
-        you need . <br />
-        <button class="btn btn-outline-success btn-sm mt-4">HOW ?</button>
+        Browse candidates personal introduction videos and CVs , and find the
+        right one you need to hire . <br />
+        <button class="btn btn-bordered btn-sm mt-4" routerLink="/employer">
+          Start Now ?
+        </button>
       </div>
     </div>
   </div>
 </div>
 <div class="py-4"></div>
 
-<div class="row mx-0 bg-light" style="border: 0.3px solid #eee">
+<div class="row mx-0 bg-scd" style="border: 0.3px solid #eee">
   <div class="col-md-5 m-auto text-center our-services p-3">
-    <p style="font-size: 19px" class="px-lg-5 px-3">
+    <p style="font-size: 18px" class="px-lg-5 px-3">
       <span class="color-main font-weight-bold"> Do you</span> want to reach the
-      right peaple easily ?
+      right peaple easily for your job ?
     </p>
-    <button class="btn btn-outline-success mt-4">post ajob</button>
+    <button class="btn btn-main mt-md-4 mb-3 mb-md-0" routerLink="/employer">
+      post ajob
+    </button>
   </div>
   <div
     class="col-md-7 mx-auto text-center our-services p-3 p-md-4 p-lg-5 bg-white"
     style="clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0 100%)"
   >
-    <p style="font-size: 18px" class="px-lg-5 px-3">
+    <p style="font-size: 18px" class="px-lg-5 px-3 pl-3 pl-md-3">
       <span class="color-main font-weight-bold"> Do you </span> want to browse
       the introductory videos , CVs before choosing the right one ?
     </p>
-    <button class="btn btn-outline-success mt-4">Browse</button>
+    <button class="btn btn-bordered mt-md-4 mb-3 mb-md-0" routerLink="/browse">
+      Browse
+    </button>
   </div>
 </div>
 
 <div class="text-center my-5 pt-3 pt-md-5">
   <div class="text-center my-5">
     <h3 class="letter-spacing text-uppercase">
-      <span class="color3 my-auto">Some</span> Templates
+      <span class="color-main my-auto">Some</span> Templates
     </h3>
   </div>
   <div class="mx-2 mx-lg-5">
@@ -796,13 +814,13 @@
       <div class="col-md-4" style="position: relative">
         <div class="overlay">
           <img
-            src="../../assets/shortenedCv.png"
+            src="../../assets/final-cvs-screens.png"
             alt=""
             width="100%"
             height="auto"
             class="cvTempalte p-2 border"
           />
-          <button class="btn btn-main middle">
+          <button class="btn btn-main middle" (click)="startMyCv()">
             <svg
               id="Capa_1"
               enable-background="new 0 0 512 512"
@@ -826,13 +844,13 @@
       <div class="col-md-4" style="position: relative">
         <div class="overlay">
           <img
-            src="../../assets/shortenedCv.png"
+            src="../../assets/dark-theme.png"
             alt=""
             width="100%"
             height="auto"
             class="cvTempalte p-2 border"
           />
-          <button class="btn btn-main middle">
+          <button class="btn btn-main middle" (click)="startMyCv()">
             <svg
               id="Capa_1"
               enable-background="new 0 0 512 512"
@@ -857,13 +875,13 @@
       <div class="col-md-4" style="position: relative">
         <div class="overlay">
           <img
-            src="../../assets/shortenedCv.png"
+            src="../../assets/light-theme.png"
             alt=""
             width="100%"
             height="auto"
             class="cvTempalte p-2 border"
           />
-          <button class="btn btn-main middle">
+          <button class="btn btn-main middle" (click)="startMyCv()">
             <svg
               id="Capa_1"
               enable-background="new 0 0 512 512"
