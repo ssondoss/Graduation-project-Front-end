@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  API: 'http://localhost:5050',
-  VIDEOS_BASE_URL: 'http://localhost:5050/images/',
+  API: 'http://161.97.164.123/plus-plus-cv-api',
+  VIDEOS_BASE_URL: 'http://161.97.164.123/images-plus/',
 
   firebaseConfig: {
     apiKey: 'AIzaSyDeo4TfATjDFJKzF6MPBOYmZYlscPtiGAw',
