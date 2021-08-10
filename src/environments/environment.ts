@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  API: 'http://161.97.164.123/plus-plus-cv-api',
-  VIDEOS_BASE_URL: 'http://161.97.164.123/images-plus/',
+  API: 'https://161.97.164.123/plus-plus-cv-api',
+  VIDEOS_BASE_URL: 'https://161.97.164.123/images-plus/',
 
   firebaseConfig: {
     apiKey: 'AIzaSyDeo4TfATjDFJKzF6MPBOYmZYlscPtiGAw',
