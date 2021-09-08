@@ -208,12 +208,17 @@
           </ul>
         </popover-content>
         <li class="nav-item active mr-5" *ngIf="!userSession.isLoggedIn">
-          <button class="btn btn-white" routerLink="/regestration">
+          <button class="btn btn-white w-100" routerLink="/regestration">
             Join us
           </button>
         </li>
-        <li class="nav-item active mr-5" *ngIf="!userSession.isLoggedIn">
-          <button class="btn btn-white" routerLink="/login">Sign in</button>
+        <li
+          class="nav-item active mr-5 my-lg-0 my-2"
+          *ngIf="!userSession.isLoggedIn"
+        >
+          <button class="btn btn-white w-100" routerLink="/login">
+            Sign in
+          </button>
         </li>
       </ul>
     </div>

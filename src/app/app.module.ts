@@ -117,7 +117,6 @@ import { ResetPasswordLinkComponent } from './reset-password-link/reset-password
     PopoverModule,
     MatDialogModule,
     MatRippleModule,
-
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,

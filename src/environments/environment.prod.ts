@@ -1,6 +1,6 @@
 export const environment = {
-  API: 'https://161.97.164.123/plus-plus-cv-api',
-  VIDEOS_BASE_URL: 'https://161.97.164.123/images-plus/',
+  API: 'https://sallatiy.com/plus-plus-cv-api',
+  VIDEOS_BASE_URL: 'https://sallatiy.com/images-plus/',
   production: true,
   firebaseConfig: {
     apiKey: 'AIzaSyDeo4TfATjDFJKzF6MPBOYmZYlscPtiGAw',
